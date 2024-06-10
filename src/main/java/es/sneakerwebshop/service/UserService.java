@@ -1,4 +1,3 @@
-
 package es.sneakerwebshop.service;
 /*Emanuel sleyman
 2024-06-10
@@ -6,18 +5,26 @@ this class is a service that is responsible for User Entity methods
 */
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.UserRepository;
-import org.hibernate.dialect.SpannerSqlAstTranslator;
+import jakarta.servlet.http.HttpSession;
+import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
-
+@Service
 public class UserService {
 
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private HttpSession session;
+
+    @Getter
+    private int userId;
+
+    public UserService(UserRepository userRepository, HttpSession session) {
         this.userRepository = userRepository;
+        this.session = session;
     }
 
 
@@ -44,6 +51,29 @@ public class UserService {
             return "could not create account";
         }
     }
+
+    public String login(String email, String password) {
+
+        try {
+            User findExistingUser = userRepository.findByEmailAndPassword(email, password);
+            if (findExistingUser == null) {
+                return  "could not find user with given credentials, try again";
+            }
+
+            if (email.equals(findExistingUser.getEmail()) && password.equals(findExistingUser.getPassword())) {
+                session.setAttribute("userId", findExistingUser.getUserId());
+                userId = (int) session.getAttribute("userId");
+                return "login granted";
+            }
+
+            return "could not sign in";
+        }catch ( Exception e) {
+            e.printStackTrace();
+            return "could not sign in";
+        }
+    }
+
+
 
 
 }
