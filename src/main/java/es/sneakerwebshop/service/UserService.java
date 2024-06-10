@@ -3,6 +3,7 @@ package es.sneakerwebshop.service;
 2024-06-10
 this class is a service that is responsible for User Entity methods
 */
+
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -28,7 +29,7 @@ public class UserService {
     }
 
 
-    public String createAccount(String name, String lastname, String email,String password, int telephoneNumber, String address){
+    public String createAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
         try {
             User ifUserExists = userRepository.findByEmailAndPassword(email, password);
             if (ifUserExists != null) {
@@ -55,9 +56,10 @@ public class UserService {
     public String login(String email, String password) {
 
         try {
+
             User findExistingUser = userRepository.findByEmailAndPassword(email, password);
             if (findExistingUser == null) {
-                return  "could not find user with given credentials, try again";
+                return "could not find user with given credentials, try again";
             }
 
             if (email.equals(findExistingUser.getEmail()) && password.equals(findExistingUser.getPassword())) {
@@ -67,13 +69,30 @@ public class UserService {
             }
 
             return "could not sign in";
-        }catch ( Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "could not sign in";
         }
     }
 
 
+    public String deleteAccount(String email, String repeatEmail, String password, String repeatPassword) {
+
+        User user = userRepository.findByEmailAndPassword(email, password);
+
+        if (user == null) {
+            return "wrong login credentials";
+        }
+
+        if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+            if (repeatEmail.equals(email) && repeatPassword.equals(password)) {
+                userRepository.delete(user);
+                return "Account deletion was successful";
+            }
+        }
+
+        return "could not delete user";
+    }
 
 
 }
