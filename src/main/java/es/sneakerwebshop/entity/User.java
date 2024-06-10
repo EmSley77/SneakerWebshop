@@ -1,4 +1,4 @@
-package es.sneakerwebshop;
+package es.sneakerwebshop.entity;
 
 import jakarta.persistence.*;
 
