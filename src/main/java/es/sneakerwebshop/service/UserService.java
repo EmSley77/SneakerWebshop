@@ -3,6 +3,8 @@ package es.sneakerwebshop.service;
 *Emanuel sleyman
 *2024-06-10
 *this class is a service that is responsible for User Entity methods
+* use session to save userId to be able to get it at anytime and make user experience smooth
+* created new account, login, delete account and edit account int this service, aswell as rest api methods
 */
 
 import es.sneakerwebshop.entity.User;
@@ -32,7 +34,9 @@ public class UserService {
 
     public String createAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
         try {
+
             User ifUserExists = userRepository.findByEmailAndPassword(email, password);
+
             if (ifUserExists != null) {
                 return "User with given credentials already exists, try other credentials";
             }
@@ -46,8 +50,10 @@ public class UserService {
             user.setAddress(address);
             user.setRole(0);
             user.setRegistrationDate(Date.valueOf(LocalDate.now()));
+
             userRepository.save(user);
             return "Your account has been successfully created, enjoy shopping " + name;
+
         } catch (Exception e) {
             e.printStackTrace();
             return "could not create account";
@@ -59,6 +65,7 @@ public class UserService {
         try {
 
             User findExistingUser = userRepository.findByEmailAndPassword(email, password);
+            //can use Optional as second option for this method part
             if (findExistingUser == null) {
                 return "could not find user with given credentials, try again";
             }
@@ -79,6 +86,7 @@ public class UserService {
 
     public String deleteAccount(String email, String repeatEmail, String password, String repeatPassword) {
 
+        //can use Optional instead but either works
         User user = userRepository.findByEmailAndPassword(email, password);
 
         if (user == null) {
