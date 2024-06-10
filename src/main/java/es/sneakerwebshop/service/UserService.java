@@ -1,7 +1,8 @@
 package es.sneakerwebshop.service;
-/*Emanuel sleyman
-2024-06-10
-this class is a service that is responsible for User Entity methods
+/*
+*Emanuel sleyman
+*2024-06-10
+*this class is a service that is responsible for User Entity methods
 */
 
 import es.sneakerwebshop.entity.User;
