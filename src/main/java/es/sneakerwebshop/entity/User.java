@@ -1,9 +1,14 @@
 package es.sneakerwebshop.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.util.Objects;
 
+@NoArgsConstructor
+@Data
 @Entity
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,81 +25,30 @@ public class User {
     @Column(name = "email", nullable = false, length = 45)
     private String email;
     @Basic
+    @Column(name = "password", nullable = false, length = 45)
+    private String password;
+    @Basic
     @Column(name = "telephone_number", nullable = false)
     private int telephoneNumber;
     @Basic
-    @Column(name = "adress", nullable = false, length = 45)
-    private String adress;
+    @Column(name = "address", nullable = false, length = 45)
+    private String address;
     @Basic
     @Column(name = "role", nullable = false)
     private int role;
+    @Basic
+    @Column(name = "registration_date", nullable = false, length = 45)
+    private Date registrationDate;
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public User(String name, String lastname, String email, String password, int telephoneNumber, String address, int role, Date registrationDate) {
         this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(int telephoneNumber) {
+        this.password = password;
         this.telephoneNumber = telephoneNumber;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
+        this.address = address;
         this.role = role;
+        this.registrationDate = registrationDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return userId == user.userId && telephoneNumber == user.telephoneNumber && role == user.role && Objects.equals(name, user.name) && Objects.equals(lastname, user.lastname) && Objects.equals(email, user.email) && Objects.equals(adress, user.adress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, name, lastname, email, telephoneNumber, adress, role);
-    }
 }
