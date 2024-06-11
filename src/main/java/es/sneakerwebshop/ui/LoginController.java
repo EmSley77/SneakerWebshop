@@ -1,5 +1,9 @@
 package es.sneakerwebshop.ui;
-
+/*
+ * Emanuel sleyman
+ * 2024-06-10
+ * controller for login attempt and getting login page, front page of website
+ */
 import es.sneakerwebshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

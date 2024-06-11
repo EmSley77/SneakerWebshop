@@ -1,5 +1,9 @@
 package es.sneakerwebshop.ui;
-
+/*
+ * Emanuel sleyman
+ * 2024-06-10
+ * controller for registering attempt
+ */
 import es.sneakerwebshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
