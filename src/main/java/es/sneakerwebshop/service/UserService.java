@@ -149,5 +149,11 @@ public class UserService {
         return userRepository.findUserByUserId(userId);
     }
 
+    //if needed to reset session, after signing out
+    public int resetSession() {
+        return userId = 0;
+    }
+
+
 
 }
