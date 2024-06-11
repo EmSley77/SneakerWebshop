@@ -28,6 +28,7 @@ public class BasketService {
 
 
     //add product to basket
+    //if product already exists in basket just increse by 1 instead of adding a new object into list
     public void addProductToBasket(int productId) {
 
         Product product = productRepository.findProductByProductId(productId);
@@ -36,8 +37,18 @@ public class BasketService {
             return;
         }
 
-        if (product.getStock() >= 1) {
+        boolean found;
+        for (Product p : basket) {
+            if (productId == p.getProductId()) {
+                int nowAmount = p.getStock();
+                p.setStock(nowAmount + 1);
+                found = true;
+                break;
+            }
+        }
 
+        if (product.getStock() >= 1) {
+            found = false;
             Product p = new Product();
 
             p.setBrand(product.getBrand());
