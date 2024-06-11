@@ -1,11 +1,11 @@
 package es.sneakerwebshop.service;
 /*
-*Emanuel sleyman
-*2024-06-10
-*this class is a service that is responsible for User Entity methods
-* use session to save userId to be able to get it at anytime and make user experience smooth
-* created new account, login, delete account and edit account int this service, aswell as rest api methods
-*/
+ *Emanuel sleyman
+ *2024-06-10
+ *this class is a service that is responsible for User Entity methods
+ * use session to save userId to be able to get it at anytime and make user experience smooth
+ * created new account, login, delete account and edit account int this service, aswell as rest api methods
+ */
 
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.UserRepository;
@@ -101,6 +101,47 @@ public class UserService {
         }
 
         return "could not delete user";
+    }
+
+
+    //edit user information
+    public String editAccountInfo(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress) {
+        try {
+            User user = userRepository.findUserByUserId(userId);
+            if (user == null) {
+                return "Could not find person to edit";
+            }
+
+            if (newName != null && !newName.isEmpty()) {
+                user.setName(newName);
+            }
+
+            if (newLastname != null && !newLastname.isEmpty()) {
+                user.setLastname(newLastname);
+            }
+
+            if (newEmail != null && !newEmail.isEmpty()) {
+                user.setEmail(newEmail);
+            }
+            if (newPassword != null && !newPassword.isEmpty()) {
+                user.setPassword(newPassword);
+            }
+
+            if (newTelephoneNumber != null) {
+                user.setTelephoneNumber(newTelephoneNumber);
+            }
+
+            if (newAddress != null && !newAddress.isEmpty()) {
+                user.setAddress(newAddress);
+            }
+
+            userRepository.save(user);
+            return "successfully updated account information";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Could not update account information";
+        }
     }
 
 
