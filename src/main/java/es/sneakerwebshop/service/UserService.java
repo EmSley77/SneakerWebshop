@@ -104,8 +104,8 @@ public class UserService {
     }
 
 
-    //edit user information
-    public String editAccountInfo(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress) {
+    //edit user information, make these parameters required false in controller so no null exception is made
+    public String editAccount(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress) {
         try {
             User user = userRepository.findUserByUserId(userId);
             if (user == null) {
@@ -142,6 +142,11 @@ public class UserService {
             e.printStackTrace();
             return "Could not update account information";
         }
+    }
+
+    //get user information, view in account page for then user to edit account
+    public User getAccount() {
+        return userRepository.findUserByUserId(userId);
     }
 
 
