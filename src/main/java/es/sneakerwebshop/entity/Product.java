@@ -26,6 +26,7 @@ public class Product {
     @Basic
     @Column(name = "stock", nullable = false)
     private int stock;
+    @Lob
     @Basic
     @Column(name = "image", nullable = false)
     private byte[] image;
