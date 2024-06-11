@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -152,6 +154,15 @@ public class UserService {
     //if needed to reset session, after signing out
     public int resetSession() {
         return userId = 0;
+    }
+
+    //_________________methods for restApi________________________
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> getUserById(int id) {
+        return userRepository.findById(id);
     }
 
 
