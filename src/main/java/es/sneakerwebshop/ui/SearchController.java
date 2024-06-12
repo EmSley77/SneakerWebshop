@@ -46,7 +46,20 @@ public class SearchController {
             return "sneaker_searchpage";
         }
         else {
-            model.addAttribute("empty", "there is nothing to get");
+            model.addAttribute("emptyList", "there is nothing to get");
+            return "sneaker_homepage";
+        }
+    }
+
+    @GetMapping("sneaker-brand")
+    public String getByBrand(String s, Model model) {
+        List<Product> products = searchService.getByBrandSearch(s);
+        if (!products.isEmpty()) {
+            model.addAttribute("shoes", products);
+            return "sneaker_searchpage";
+        }
+        else {
+            model.addAttribute("emptyBrandList", "there is nothing to get");
             return "sneaker_homepage";
         }
     }

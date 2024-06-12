@@ -6,11 +6,37 @@
 </head>
 <body>
 
-    <div>
-        <form action="sneaker-get-search-sneaker" method="get">
-            <input type="text" name="search" placeholder="Find shoes">
-            <button type="submit">Search</button>
-        </form>
+    <div class="container">
+
+        <div class="search">
+            <form action="sneaker-get-search-sneaker" method="get">
+                <input type="text" name="search" placeholder="Find shoes">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+
+        <div class="category">
+            <form action="sneaker-category" method="get">
+                <button type="submit" name="s" value="Sneaker">Sneakers</button>
+                <button type="submit" name="s" value="Boot">Boots</button>
+                <button type="submit" name="s" value="Slipper">Slippers</button>
+                <button type="submit" name="s" value="Shoe">Shoes</button><br>
+                <a> <span th:text="${emptyList}"></span></a>
+            </form>
+        </div>
+
+
+        <div class="brand">
+            <form action="sneaker-brand" method="get">
+                <button type="submit" name="s" value="Nike">Nike</button>
+                <button type="submit" name="s" value="Adidas">Adidas</button>
+                <button type="submit" name="s" value="Jordan">Jordan</button>
+                <button type="submit" name="s" value="Yeezy">Yeezy</button><br>
+                <a> <span th:text="${emptyBrandList}"></span></a>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>
