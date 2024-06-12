@@ -78,6 +78,7 @@ public class BasketService {
 
 
     //decrease product amount, if <1 delete from basket
+    //TODO: must finish this, not working completely correct
     public void decreaseAmountInBasket(int productId) {
         Product p = productRepository.findProductByProductId(productId);
         if (p == null || p.getStock() <= 0) {
@@ -89,11 +90,9 @@ public class BasketService {
                 productInBasket.setStock(newAmount);
                 productInBasket.setProductCost(newAmount * p.getProductCost());
 
-                if (productInBasket.getStock() <= 0) {
+                if (newAmount <= 1) {
                     basket.remove(productInBasket);
-                    break;
                 }
-
             }
         }
     }
