@@ -85,10 +85,14 @@ public class BasketService {
         }
         for (Product productInBasket : basket) {
             if (productId == productInBasket.getProductId() && productInBasket.getStock() > 1) {
-
                 int newAmount = productInBasket.getStock() - 1;
                 productInBasket.setStock(newAmount);
                 productInBasket.setProductCost(newAmount * p.getProductCost());
+
+                if (productInBasket.getStock() <= 0) {
+                    basket.remove(productInBasket);
+                    break;
+                }
 
             }
         }
