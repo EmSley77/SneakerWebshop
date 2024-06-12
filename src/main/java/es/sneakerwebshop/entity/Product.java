@@ -1,10 +1,14 @@
 package es.sneakerwebshop.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 @Entity
 public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,79 +30,23 @@ public class Product {
     @Basic
     @Column(name = "stock", nullable = false)
     private int stock;
+    @Basic
+    @Column(name = "shoe_size", nullable = false)
+    private double shoeSize;
     @Lob
     @Basic
     @Column(name = "image", nullable = false)
     private byte[] image;
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
+    public Product(String category, String brand, String name, int productCost, int stock, double shoeSize, byte[] image) {
         this.category = category;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public int getProductCost() {
-        return productCost;
-    }
-
-    public void setProductCost(int productCost) {
         this.productCost = productCost;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
+        this.shoeSize = shoeSize;
         this.image = image;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return productId == product.productId && productCost == product.productCost && stock == product.stock && Objects.equals(category, product.category) && Objects.equals(brand, product.brand) && Objects.equals(name, product.name) && Arrays.equals(image, product.image);
-    }
 
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(productId, category, brand, name, productCost, stock);
-        result = 31 * result + Arrays.hashCode(image);
-        return result;
-    }
 }
