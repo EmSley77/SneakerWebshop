@@ -2,7 +2,7 @@ package es.sneakerwebshop.service;
 /*
  * Emanuel sleyman
  * 2024-06-12
- * Service for everyhitng that has with searching to do
+ * Service for everything that has with searching to do
  */
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.repository.ProductRepository;

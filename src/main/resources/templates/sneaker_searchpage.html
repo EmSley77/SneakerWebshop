@@ -5,12 +5,24 @@
     <title>Search-Page</title>
 </head>
 <body>
-<div>
-    <tr th:each="s : ${shoes}">
-        <td th:text="${s.getBrand()}"></td>
-        <td th:text="${s.getName()}"></td>
-        <td th:text="${s.getProductCost()}"></td>
-    </tr>
+
+<div class="container">
+
+    <div class="search">
+        <form action="sneaker-get-search-sneaker" method="get">
+            <input type="text" name="search" placeholder="Find shoes">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="shoes">
+        <tr th:each="s : ${shoes}">
+            <td th:text="${s.getBrand()}"></td>
+            <td th:text="${s.getName()}"></td>
+            <td th:text="${s.getProductCost()}"></td>
+        </tr>
+    </div>
+
 
 
     <form action="sneaker-homepage" method="get">
