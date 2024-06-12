@@ -20,6 +20,12 @@
             <td th:text="${s.getBrand()}"></td>
             <td th:text="${s.getName()}"></td>
             <td th:text="${s.getProductCost()}"></td>
+            <td>
+                <form action="sneaker-add-basket" method="post">
+                    <input type="hidden" name="id" th:value="${s.getProductId()}">
+                    <button type="submit">Add</button>
+                </form>
+            </td>
         </tr>
     </div>
 
