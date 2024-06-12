@@ -146,6 +146,11 @@ public class UserService {
         }
     }
 
+    // get user role to identify admin 1 or user 0
+    public int getRole() {
+        return userRepository.findUserByUserId(userId).getRole();
+    }
+
     //get user information, view in account page for then user to edit account
     public User getAccount() {
         return userRepository.findUserByUserId(userId);

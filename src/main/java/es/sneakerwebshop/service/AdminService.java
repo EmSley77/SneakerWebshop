@@ -19,17 +19,11 @@ public class AdminService {
 
     private UserRepository userRepository;
 
-    private HttpSession session;
-
-    @Getter
-    private int userId;
-
-    public AdminService(UserRepository userRepository, HttpSession session) {
+    public AdminService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.session = session;
     }
 
-    public String createAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
+    public String createAdminAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
         try {
 
             User ifUserExists = userRepository.findByEmailAndPassword(email, password);
@@ -45,7 +39,7 @@ public class AdminService {
             user.setPassword(password);
             user.setTelephoneNumber(telephoneNumber);
             user.setAddress(address);
-            user.setRole(0);
+            user.setRole(1);
             user.setRegistrationDate(Date.valueOf(LocalDate.now()));
 
             userRepository.save(user);
@@ -56,45 +50,7 @@ public class AdminService {
             return "could not create account";
         }
     }
-    //edit Admin information, make these parameters required false in controller so no null exception is made
-    public String editAccount(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress) {
-        try {
-            User user = userRepository.findUserByUserId(userId);
-            if (user == null) {
-                return "Could not find person to edit";
-            }
 
-            if (newName != null && !newName.isEmpty()) {
-                user.setName(newName);
-            }
-
-            if (newLastname != null && !newLastname.isEmpty()) {
-                user.setLastname(newLastname);
-            }
-
-            if (newEmail != null && !newEmail.isEmpty()) {
-                user.setEmail(newEmail);
-            }
-            if (newPassword != null && !newPassword.isEmpty()) {
-                user.setPassword(newPassword);
-            }
-
-            if (newTelephoneNumber != null) {
-                user.setTelephoneNumber(newTelephoneNumber);
-            }
-
-            if (newAddress != null && !newAddress.isEmpty()) {
-                user.setAddress(newAddress);
-            }
-
-            userRepository.save(user);
-            return "successfully updated account information";
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Could not update account information";
-        }
-    }
 
 
 }
