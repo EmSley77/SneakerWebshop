@@ -1,9 +1,10 @@
 package es.sneakerwebshop.service;
 /*
-*Emanuel sleyman
-*2024-06-11
-*this service contains all the important methods belonging to basket
-*/
+ *Emanuel sleyman
+ *2024-06-11
+ *this service contains all the important methods belonging to basket
+ */
+
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.repository.ProductRepository;
 import lombok.Getter;
@@ -26,8 +27,8 @@ public class BasketService {
     private List<Product> basket = new ArrayList<>();
 
 
-    //add product to basket
-    //if product already exists in basket just increse by 1 instead of adding a new object into list
+    // add product to basket
+    //TODO: if product already exists in basket just increse by 1 instead of adding a new object into list
     public void addProductToBasket(int productId) {
 
         Product product = productRepository.findProductByProductId(productId);
@@ -36,18 +37,19 @@ public class BasketService {
             return;
         }
 
-        boolean found;
+        boolean found = false;
         for (Product p : basket) {
             if (productId == p.getProductId()) {
                 int nowAmount = p.getStock();
                 p.setStock(nowAmount + 1);
+                p.setProductCost(p.getStock() * p.getProductCost());
                 found = true;
                 break;
             }
         }
 
-        if (product.getStock() >= 1) {
-            found = false;
+        //check if not found and if stock amount is higher than 1
+        if (!found && product.getStock() >= 1) {
             Product p = new Product();
 
             p.setBrand(product.getBrand());
@@ -75,25 +77,21 @@ public class BasketService {
     }
 
 
-
-
     //decrease product amount, if <1 delete from basket
-    public List<Product> decreaseAmountInBasket(int productId) {
+    public void decreaseAmountInBasket(int productId) {
+        Product p = productRepository.findProductByProductId(productId);
+        if (p == null || p.getStock() <= 0) {
+            return;
+        }
+        for (Product productInBasket : basket) {
+            if (productId == productInBasket.getProductId() && productInBasket.getStock() > 1) {
 
-        for (Product product : basket) {
-            if (productId == product.getProductId() && product.getStock() > 1) {
-                int newAmount = product.getStock() - 1;
-                product.setStock(newAmount);
-                break;
+                int newAmount = productInBasket.getStock() - 1;
+                productInBasket.setStock(newAmount);
+                productInBasket.setProductCost(newAmount * p.getProductCost());
 
-            }
-            //if product amount in basket is lower or equal to 0 remove from basket
-            if (product.getStock() <= 0) {
-                basket.remove(product);
-                break;
             }
         }
-        return basket;
     }
 
 
@@ -102,22 +100,26 @@ public class BasketService {
     public List<Product> increaseAmountInBasket(int productId) {
 
         Product p = productRepository.findProductByProductId(productId);
+        if (p == null || p.getStock() <= 0) {
+            return basket;
+        }
 
-        for (Product product : basket) {
+        boolean foundInBasket = false;
+        for (Product productInBasket : basket) {
 
-            if (productId == product.getProductId() && p.getStock() > 1) {
-                product.setStock(product.getStock() + 1);
+            if (productId == productInBasket.getProductId()) {
+                if (p.getStock() > productInBasket.getStock()) {
+                    int newAmount = productInBasket.getStock() + 1;
+                    productInBasket.setStock(newAmount);
+                    productInBasket.setProductCost(newAmount * p.getProductCost());
+                }
+                foundInBasket = true;
                 break;
+
             }
-
-            // if theres is not anymore in stock just dont add or do anything, break out of the loop
-            if (product.getProductId() == productId && p.getStock() <= 0) {
-                break;
-            }
-
-
         }
         return basket;
+
     }
 
 }

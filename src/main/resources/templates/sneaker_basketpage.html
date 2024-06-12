@@ -10,6 +10,24 @@
         <td th:text="${p.getName()}"></td>
         <td th:text="${p.getStock()}"></td>
         <td th:text="${p.getProductCost()}"></td>
+        <td>
+            <form action="sneaker-delete-basket" method="post">
+                <input type="hidden" name="id" th:value="${p.getProductId()}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <form action="sneaker-increase-amount" method="post">
+                <input type="hidden" name="id" th:value="${p.getProductId()}">
+                <button type="submit">+</button>
+            </form>
+        </td>
+        <td>
+            <form action="sneaker-decrease-amount" method="post">
+                <input type="hidden" name="id" th:value="${p.getProductId()}">
+                <button type="submit">-</button>
+            </form>
+        </td>
     </tr>
 </div>
 
