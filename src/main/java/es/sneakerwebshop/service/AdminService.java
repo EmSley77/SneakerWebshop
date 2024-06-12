@@ -7,8 +7,6 @@ package es.sneakerwebshop.service;
 
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -43,7 +41,7 @@ public class AdminService {
             user.setRegistrationDate(Date.valueOf(LocalDate.now()));
 
             userRepository.save(user);
-            return "Your account has been successfully created, enjoy shopping " + name;
+            return "Admin added";
 
         } catch (Exception e) {
             e.printStackTrace();

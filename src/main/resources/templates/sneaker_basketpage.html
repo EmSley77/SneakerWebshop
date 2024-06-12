@@ -9,13 +9,12 @@
     <tr th:each="p : ${basket}">
         <td th:text="${p.getName()}"></td>
         <td th:text="${p.getStock()}"></td>
-        <td>
-            <img src="">
-        </td>
+        <td th:text="${p.getProductCost()}"></td>
     </tr>
 </div>
 
 <form action="sneaker-get-search-sneaker" method="get">
+    <input type="hidden" name="search">
     <button type="submit">Searchpage</button>
 </form>
 </body>
