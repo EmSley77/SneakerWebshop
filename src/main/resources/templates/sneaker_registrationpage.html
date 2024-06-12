@@ -5,23 +5,32 @@
     <title>Registration Page</title>
 </head>
 <body>
-<div>
-    <form action="sneaker-register-user" method="post">
+<div class="container">
+    <div class="register">
+        <form action="sneaker-register-user" method="post">
 
-        <input type="text" name="name" placeholder="Enter Name" required> <br>
-        <input type="text" name="lastname" placeholder="Enter Lastname" required> <br>
-        <input type="text" name="email" placeholder="Enter Email" required> <br>
-        <input type="text" name="repeatEmail" placeholder="Repeat Email" required> <br>
+            <input type="text" name="name" placeholder="Enter Name" required> <br>
+            <input type="text" name="lastname" placeholder="Enter Lastname" required> <br>
+            <input type="text" name="email" placeholder="Enter Email" required> <br>
+            <input type="text" name="repeatEmail" placeholder="Repeat Email" required> <br>
 
-        <input type="text" name="password" placeholder="Enter Password" required> <br>
-        <input type="password" name="repeatPassword" placeholder="Repeat Password" required> <br>
+            <input type="text" name="password" placeholder="Enter Password" required> <br>
+            <input type="password" name="repeatPassword" placeholder="Repeat Password" required> <br>
 
-        <input type="number" name="telephoneNumber" placeholder="Enter Cellphone" required> <br>
-        <input type="text" name="address" placeholder="Enter Your Address" required> <br>
-        <button type="submit">Register</button> <br>
+            <input type="number" name="telephoneNumber" placeholder="Enter Cellphone" required> <br>
+            <input type="text" name="address" placeholder="Enter Your Address" required> <br>
+            <button type="submit">Register</button> <br>
 
-        <a> <span th:text="${result}"></span></a>
-    </form>
+            <a> <span th:text="${result}"></span></a>
+        </form>
+    </div>
+
+    <div class="loginpage">
+        <form action="sneaker-homepage" method="get">
+            <button type="submit">Login page</button>
+        </form>
+    </div>
+
 </div>
 </body>
 </html>
