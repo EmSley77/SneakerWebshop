@@ -20,6 +20,11 @@ public class LoginController {
         this.userService = userService;
     }
 
+    @GetMapping("sneaker-homepage")
+    public String getHomepage() {
+        return "sneaker_homepage";
+    }
+
     @GetMapping("sneaker-page")
     public String getLoginPage() {
         return "sneaker_loginpage";

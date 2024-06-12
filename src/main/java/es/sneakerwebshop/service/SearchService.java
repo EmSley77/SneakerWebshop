@@ -31,6 +31,17 @@ public class SearchService {
     }
 
 
+    //category search
+    public List<Product> getByCategorySearch(String s) {
+        return productRepository.findByCategoryContaining(s);
+    }
+
+    //Brand search
+    public List<Product> getByBrandSearch(String s) {
+        return productRepository.findByBrandContaining(s);
+    }
+
+
 
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search-Page</title>
+</head>
+<body>
+<div>
+    <tr th:each="s : ${shoes}">
+        <td th:text="${s.getBrand()}"></td>
+        <td th:text="${s.getName()}"></td>
+        <td th:text="${s.getProductCost()}"></td>
+    </tr>
+
+
+    <form action="sneaker-homepage" method="get">
+        <button type="submit">Homepage</button>
+    </form>
+</div>
+
+</body>
+</html>
