@@ -6,5 +6,34 @@
 </head>
 <body>
 
+<div>
+    <div class="account">
+        <form action="sneaker-account-update" method="post">
+            <a>Name: <span th:text="${account.getName()}"></span></a> <br>
+            <input type="text" name="newName" placeholder="Enter new Name"> <br> <br>
+            <a>Lastname: <span th:text="${account.getLastname()}"></span></a> <br>
+            <input type="text" name="newLastname" placeholder="Enter new Lastname"> <br> <br>
+
+            <a>Email: <span th:text="${account.getEmail()}"></span></a> <br>
+            <input type="text" name="newEmail" placeholder="Enter new Email"> <br> <br>
+
+            <a>Password: <span th:text="${account.getPassword()}"></span></a> <br>
+            <input type="text" name="newPassword" placeholder="Enter new Password"><br>
+            <input type="password" name="repeatPassword" placeholder="repeat new Password"> <br> <br>
+
+
+            <a>Address: <span th:text="${account.getAddress()}"></span></a> <br>
+            <input type="text" name="newAddress" placeholder="Enter new Address"> <br> <br>
+
+            <a>Tel: <span th:text="${account.getTelephoneNumber()}"></span></a> <br>
+            <input type="number" name="newTelephoneNumber" placeholder="Enter new Telephone"> <br> <br>
+
+
+
+            <a>Registration date: <span th:text="${account.getRegistrationDate()}"></span></a>
+        </form>
+
+    </div>
+</div>
 </body>
 </html>
