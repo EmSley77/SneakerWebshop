@@ -29,13 +29,11 @@ public class SearchController {
 
             model.addAttribute("shoes", products);
             return "sneaker_searchpage";
-        } else if (search.isEmpty()) {
+        } else  {
             model.addAttribute("shoes", searchService.getAllProducts());
             return "sneaker_searchpage";
         }
-        else {
-            return "sneaker_homepage";
-        }
+
     }
 
     @GetMapping("sneaker-category")

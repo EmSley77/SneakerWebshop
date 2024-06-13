@@ -33,7 +33,7 @@ public class LoginController {
 
     //Attempt to login
     @PostMapping("sneaker-login-attempt")
-    public String tryToLogin(@RequestParam String email, @RequestParam String password, Model model) {
+    public String signInAttempt(@RequestParam String email, @RequestParam String password, Model model) {
         String result = userService.login(email, password);
         if (result.equals("login granted") && userService.getRole() == 0) {
             return "sneaker_homepage";
