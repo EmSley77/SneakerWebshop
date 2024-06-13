@@ -9,9 +9,11 @@ import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.repository.ProductRepository;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -134,6 +136,21 @@ public class BasketService {
 
     public int getproductStock(int id) {
         return productRepository.findProductByProductId(id).getStock();
+    }
+
+    public void getBasket(Model model) {
+        List<Product> basket = getBasket();
+        if (!basket.isEmpty()) {
+            List<String> arrImages = new ArrayList<>();
+            for (Product p : basket) {
+                String images = Base64.getEncoder().encodeToString(p.getImage());
+                arrImages.add(images);
+            }
+
+            model.addAttribute("basket", basket);
+            model.addAttribute("images", arrImages);
+
+        }
     }
 
 }

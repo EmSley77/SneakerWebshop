@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -33,7 +35,14 @@ public class BasketController {
     public String getBasketPage(Model model) {
         List<Product> basket = basketService.getBasket();
         if (!basket.isEmpty()) {
+            List<String> arrImages = new ArrayList<>();
+            for (Product p : basket) {
+                String images = Base64.getEncoder().encodeToString(p.getImage());
+                arrImages.add(images);
+            }
+
             model.addAttribute("basket", basket);
+            model.addAttribute("images", arrImages);
             return "sneaker_basketpage";
         } else {
             model.addAttribute("emptyBasket", "No items in basket");
@@ -45,36 +54,35 @@ public class BasketController {
     public String addToBasket(@RequestParam int id, Model model) {
         if (basketService.getproductStock(id) >= 1) {
             basketService.addProductToBasket(id);
-            model.addAttribute("basket", basketService.getBasket());
+            basketService.getBasket(model);
             return "sneaker_basketpage";
         } else {
             model.addAttribute("shoes", searchService.getAllProducts());
             return "sneaker_searchpage";
         }
-
     }
 
 
     @PostMapping("sneaker-delete-basket")
     public String deleteProduct(int id, Model model) {
         basketService.removeProductFromBasket(id);
-        model.addAttribute("basket", basketService.getBasket());
+        basketService.getBasket(model);
         return "sneaker_basketpage";
     }
 
     @PostMapping("sneaker-increase-amount")
     public String increaseAmount(int id, Model model) {
         basketService.increaseAmountInBasket(id);
-        model.addAttribute("basket", basketService.getBasket());
+        basketService.getBasket(model);
         return "sneaker_basketpage";
+
     }
 
     @PostMapping("sneaker-decrease-amount")
     public String decreaseAmount(Integer id, Model model) {
         basketService.decreaseAmountInBasket(id);
-        model.addAttribute("basket", basketService.getBasket());
+        basketService.getBasket(model);
         return "sneaker_basketpage";
-
 
     }
 }

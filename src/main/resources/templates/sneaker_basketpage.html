@@ -3,33 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Basket Page</title>
+    <style>
+        .img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
 <a> <span th:text="${emptyBasket}"></span></a>
 <div>
-    <tr th:each="p : ${basket}">
-        <td th:text="${p.getName()}"></td>
-        <td th:text="${p.getStock()}"></td>
-        <td th:text="${p.getProductCost()}"></td>
-        <td>
-            <form action="sneaker-delete-basket" method="post">
-                <input type="hidden" name="id" th:value="${p.getProductId()}">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-        <td>
-            <form action="sneaker-increase-amount" method="post">
-                <input type="hidden" name="id" th:value="${p.getProductId()}">
-                <button type="submit">+</button>
-            </form>
-        </td>
-        <td>
-            <form action="sneaker-decrease-amount" method="post">
-                <input type="hidden" name="id" th:value="${p.getProductId()}">
-                <button type="submit">-</button>
-            </form>
-        </td>
-    </tr>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Stock</th>
+            <th>Cost</th>
+            <th></th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p, image : ${basket}">
+            <td th:text="${p.getName()}"></td>
+            <td th:text="${p.getStock()}"></td>
+            <td th:text="${p.getProductCost()}"></td>
+            <td th:if="${images != null and !images.isEmpty()}">
+                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+            </td>
+            <td>
+                <form action="sneaker-delete-basket" method="post">
+                    <input type="hidden" name="id" th:value="${p.getProductId()}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form action="sneaker-increase-amount" method="post">
+                    <input type="hidden" name="id" th:value="${p.getProductId()}">
+                    <button type="submit">+</button>
+                </form>
+            </td>
+            <td>
+                <form action="sneaker-decrease-amount" method="post">
+                    <input type="hidden" name="id" th:value="${p.getProductId()}">
+                    <button type="submit">-</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <form action="sneaker-get-search-sneaker" method="get">

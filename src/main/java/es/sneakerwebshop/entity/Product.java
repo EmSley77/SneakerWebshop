@@ -34,7 +34,7 @@ public class Product {
     @Column(name = "shoe_size", nullable = false)
     private double shoeSize;
     @Lob
-    @Basic
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "image", nullable = false)
     private byte[] image;
 
