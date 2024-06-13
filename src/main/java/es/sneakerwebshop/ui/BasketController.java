@@ -27,7 +27,8 @@ public class BasketController {
     }
 
     @GetMapping("sneaker-get-basket")
-    public String getBasketPage() {
+    public String getBasketPage(Model model) {
+        model.addAttribute("basket", basketService.getBasket());
         return "sneaker_basketpage";
     }
 
