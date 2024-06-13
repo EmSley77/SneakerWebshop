@@ -5,6 +5,7 @@ package es.sneakerwebshop.ui;
  * Controller for everything that has basket methods to do
  */
 
+import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.BasketService;
 import es.sneakerwebshop.service.SearchService;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -28,8 +31,14 @@ public class BasketController {
 
     @GetMapping("sneaker-get-basket")
     public String getBasketPage(Model model) {
-        model.addAttribute("basket", basketService.getBasket());
-        return "sneaker_basketpage";
+        List<Product> basket = basketService.getBasket();
+        if (!basket.isEmpty()) {
+            model.addAttribute("basket", basket);
+            return "sneaker_basketpage";
+        } else {
+            model.addAttribute("emptyBasket", "No items in basket");
+            return "sneaker_basketpage";
+        }
     }
 
     @PostMapping("sneaker-add-basket")
