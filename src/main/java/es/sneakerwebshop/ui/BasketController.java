@@ -33,15 +33,15 @@ public class BasketController {
 
     @PostMapping("sneaker-add-basket")
     public String addToBasket(@RequestParam int id, Model model) {
-        try {
+        if (basketService.getproductStock(id) >= 1) {
             basketService.addProductToBasket(id);
             model.addAttribute("basket", basketService.getBasket());
             return "sneaker_basketpage";
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
             model.addAttribute("shoes", searchService.getAllProducts());
             return "sneaker_searchpage";
         }
+
     }
 
 
@@ -61,16 +61,10 @@ public class BasketController {
 
     @PostMapping("sneaker-decrease-amount")
     public String decreaseAmount(Integer id, Model model) {
+        basketService.decreaseAmountInBasket(id);
+        model.addAttribute("basket", basketService.getBasket());
+        return "sneaker_basketpage";
 
-        try {
-            basketService.decreaseAmountInBasket(id);
-            model.addAttribute("basket", basketService.getBasket());
-            return "sneaker_basketpage";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("basket", basketService.getBasket());
-            return "sneaker_basketpage";
-        }
 
     }
 }

@@ -9,11 +9,13 @@ import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.repository.ProductRepository;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@SessionScope
 public class BasketService {
 
 
@@ -40,12 +42,15 @@ public class BasketService {
         boolean found = false;
         for (Product p : basket) {
             if (productId == p.getProductId()) {
-                int nowAmount = p.getStock();
-                p.setStock(nowAmount + 1);
-                p.setProductCost(p.getStock() * p.getProductCost());
-                found = true;
+                if (product.getStock() > p.getStock()) {
+                    int nowAmount = p.getStock();
+                    p.setStock(nowAmount + 1);
+                    p.setProductCost(p.getStock() * p.getProductCost());
+                    found = true;
+                }
                 break;
             }
+
         }
 
         //check if not found and if stock amount is higher than 1
@@ -79,44 +84,43 @@ public class BasketService {
 
     //decrease product amount, if <1 delete from basket
     //TODO: must finish this, not working completely correct
-    public List<Product> decreaseAmountInBasket(int productId) {
+    public void decreaseAmountInBasket(int productId) {
         Product p = productRepository.findProductByProductId(productId);
         if (p == null || p.getStock() <= 0) {
-            return basket;
+            return;
         }
 
         boolean foundInBasket = false;
         for (Product productInBasket : basket) {
 
             if (productId == productInBasket.getProductId()) {
-                if (p.getStock() > productInBasket.getStock()) {
-                    if (productInBasket.getStock() < 2) {
-                        basket.remove(productInBasket);
-                        break;
-                    }
+                if (productInBasket.getStock() > 1) {
                     int newAmount = productInBasket.getStock() - 1;
                     productInBasket.setStock(newAmount);
                     productInBasket.setProductCost(newAmount * p.getProductCost());
+
+
+
+                } else {
+                    basket.remove(productInBasket);
                 }
 
-                foundInBasket = true;
                 break;
             }
         }
-        return basket;
     }
 
 
     //increase product amount, if stock is empty do not continue to increase amount....
 
-    public List<Product> increaseAmountInBasket(int productId) {
+    public void increaseAmountInBasket(int productId) {
 
         Product p = productRepository.findProductByProductId(productId);
-        if (p == null || p.getStock() <= 0) {
-            return basket;
+        if (p == null) {
+            return;
         }
 
-        boolean foundInBasket = false;
+
         for (Product productInBasket : basket) {
 
             if (productId == productInBasket.getProductId()) {
@@ -125,13 +129,15 @@ public class BasketService {
                     productInBasket.setStock(newAmount);
                     productInBasket.setProductCost(newAmount * p.getProductCost());
                 }
-                foundInBasket = true;
-                break;
 
+                break;
             }
         }
-        return basket;
+    }
 
+
+    public int getproductStock(int id) {
+        return productRepository.findProductByProductId(id).getStock();
     }
 
 }

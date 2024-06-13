@@ -12,6 +12,7 @@ import es.sneakerwebshop.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@SessionScope
 public class UserService {
 
     private UserRepository userRepository;
