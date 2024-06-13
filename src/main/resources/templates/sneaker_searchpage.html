@@ -21,8 +21,10 @@
         </form>
     </div>
 
-    <div class="shoes">
-        <tr th:each="s, image  : ${shoes}">
+    <table class="shoes">
+
+        <tbody>
+        <tr th:each="s, image : ${shoes}">
             <td th:text="${s.getBrand()}"></td>
             <td th:text="${s.getName()}"></td>
             <td th:text="${s.getProductCost()}"></td>
@@ -36,14 +38,14 @@
                 </form>
             </td>
         </tr>
-    </div>
+        </tbody>
+    </table>
 
     <div class="basket-page">
         <form action="sneaker-get-basket" method="get">
             <button type="submit">Basket</button>
         </form>
     </div>
-
 
 
     <form action="sneaker-homepage" method="get">

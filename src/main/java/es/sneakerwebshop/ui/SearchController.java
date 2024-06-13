@@ -29,7 +29,7 @@ public class SearchController {
     public String getSneakers(@RequestParam String search, Model model) {
         List<Product> products = searchService.searchForProducts(search);
         if (!search.isEmpty()) {
-            // TODO: make this into a won method, to get products and their image
+            // TODO: make this into a own method, to get products and their image
             List<String> arrImages = new ArrayList<>();
             for (Product p : products) {
                 String byte64 = Base64.getEncoder().encodeToString(p.getImage());
@@ -39,7 +39,15 @@ public class SearchController {
             model.addAttribute("images", arrImages);
             return "sneaker_searchpage";
         } else {
-            model.addAttribute("shoes", searchService.getAllProducts());
+            //TODO: fix this redundant code
+            List<Product> productList = searchService.getAllProducts();
+            List<String> arrImg = new ArrayList<>();
+            for (Product p : productList) {
+                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
+                arrImg.add(byte64);
+            }
+            model.addAttribute("shoes", productList);
+            model.addAttribute("images", arrImg);
             return "sneaker_searchpage";
         }
 
@@ -49,7 +57,7 @@ public class SearchController {
     public String getByCategory(String s, Model model) {
         List<Product> products = searchService.getByCategorySearch(s);
         if (!products.isEmpty()) {
-            // TODO: make this into a won method, to get products and their image
+            // TODO: make this into a own method, to get products and their image
             List<String> arrImages = new ArrayList<>();
             for (Product p : products) {
                 String byte64 = Base64.getEncoder().encodeToString(p.getImage());
@@ -57,6 +65,7 @@ public class SearchController {
             }
             model.addAttribute("shoes", products);
             model.addAttribute("images", arrImages);
+            return "sneaker_searchpage";
         }
         model.addAttribute("emptyList", "there is nothing to get");
         return "sneaker_homepage";
@@ -67,7 +76,7 @@ public class SearchController {
     public String getByBrand(String s, Model model) {
         List<Product> products = searchService.getByBrandSearch(s);
         if (!products.isEmpty()) {
-            // TODO: make this into a won method, to get products and their image
+            // TODO: make this into a own method, to get products and their image
             List<String> arrImages = new ArrayList<>();
             for (Product p : products) {
                 String byte64 = Base64.getEncoder().encodeToString(p.getImage());
@@ -75,7 +84,7 @@ public class SearchController {
             }
             model.addAttribute("shoes", products);
             model.addAttribute("images", arrImages);
-
+            return "sneaker_searchpage";
         }
         model.addAttribute("emptyBrandList", "there is nothing to get");
         return "sneaker_homepage";
