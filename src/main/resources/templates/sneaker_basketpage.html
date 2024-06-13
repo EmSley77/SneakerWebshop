@@ -5,7 +5,8 @@
     <title>Basket Page</title>
 </head>
 <body>
-<div th:if="${!basket.isEmpty()}">
+<a> <span th:text="${emptyBasket}"></span></a>
+<div>
     <tr th:each="p : ${basket}">
         <td th:text="${p.getName()}"></td>
         <td th:text="${p.getStock()}"></td>
