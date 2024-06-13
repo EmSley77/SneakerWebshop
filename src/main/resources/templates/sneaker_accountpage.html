@@ -28,8 +28,9 @@
             <a>Tel: <span th:text="${account.getTelephoneNumber()}"></span></a> <br>
             <input type="number" name="newTelephoneNumber" placeholder="Enter new Telephone"> <br> <br>
 
-            <a>Registration date: <span th:text="${account.getRegistrationDate()}"></span></a> br
-            <button type="submit">edit</button>
+            <a>Registration date: <span th:text="${account.getRegistrationDate()}"></span></a> <br>
+            <button type="submit">edit</button> <br>
+            <a><span th:text="${result}"></span></a>
 
         </form>
 
