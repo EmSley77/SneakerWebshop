@@ -4,24 +4,72 @@
     <meta charset="UTF-8">
     <title>Basket Page</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: darkslategrey;
+            filter: drop-shadow(0px 2px 5px black);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td {
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+
+        }
+
         .img {
             width: 200px;
             height: 200px;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #4c14b7;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 20px;
+
+        }
+        button:hover {
+            background-color: #080318;
+            transition: 1s;
+        }
+        form {
+            display: inline;
+        }
+        .c-btn{
+            position: absolute;
+            right: 10px;
         }
     </style>
 </head>
 <body>
 <a> <span th:text="${emptyBasket}"></span></a>
 <div>
+
     <table>
         <thead>
         <tr>
             <th>Name</th>
             <th>Stock</th>
             <th>Cost</th>
-            <th></th>
             <th>Image</th>
-            <th>Action</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -37,14 +85,10 @@
                     <input type="hidden" name="id" th:value="${p.getProductId()}">
                     <button type="submit">Delete</button>
                 </form>
-            </td>
-            <td>
                 <form action="sneaker-increase-amount" method="post">
                     <input type="hidden" name="id" th:value="${p.getProductId()}">
                     <button type="submit">+</button>
                 </form>
-            </td>
-            <td>
                 <form action="sneaker-decrease-amount" method="post">
                     <input type="hidden" name="id" th:value="${p.getProductId()}">
                     <button type="submit">-</button>
@@ -53,11 +97,12 @@
         </tr>
         </tbody>
     </table>
+
 </div>
 
 
 <form action="sneaker-get-basket-total" method="get">
-    <button type="submit">confirm page</button>
+    <button type="submit" class="c-btn">confirm page</button>
 </form>
 
 <form action="sneaker-get-search-sneaker" method="get">
