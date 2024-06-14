@@ -29,7 +29,6 @@ public class SearchController {
     public String getSneakers(@RequestParam String search, Model model) {
         List<Product> products = searchService.searchForProducts(search);
         if (!search.isEmpty()) {
-            // TODO: make this into a own method, to get products and their image
             List<String> arrImages = new ArrayList<>();
             for (Product p : products) {
                 String byte64 = Base64.getEncoder().encodeToString(p.getImage());
@@ -39,16 +38,13 @@ public class SearchController {
             model.addAttribute("images", arrImages);
             return "sneaker_searchpage";
         } else {
-            //TODO: fix this redundant code
             List<Product> productList = searchService.getAllProducts();
-            List<String> arrImg = new ArrayList<>();
-            for (Product p : productList) {
-                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
-                arrImg.add(byte64);
+            if (!productList.isEmpty()) {
+                searchService.getAllProducts(model, productList);
+                return "sneaker_searchpage";
+            } else {
+                return "sneaker_homepage";
             }
-            model.addAttribute("shoes", productList);
-            model.addAttribute("images", arrImg);
-            return "sneaker_searchpage";
         }
 
     }
