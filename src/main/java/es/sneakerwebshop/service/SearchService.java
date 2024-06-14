@@ -78,4 +78,15 @@ public class SearchService {
         model.addAttribute("images", arrImg);
     }
 
+
+    public void getSearchProducts(Model model, List<Product> products) {
+        List<String> arrImages = new ArrayList<>();
+        for (Product p : products) {
+            String byte64 = Base64.getEncoder().encodeToString(p.getImage());
+            arrImages.add(byte64);
+        }
+        model.addAttribute("shoes", products);
+        model.addAttribute("images", arrImages);
+    }
+
 }

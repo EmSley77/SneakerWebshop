@@ -28,14 +28,8 @@ public class SearchController {
     @GetMapping("sneaker-get-search-sneaker")
     public String getSneakers(@RequestParam String search, Model model) {
         List<Product> products = searchService.searchForProducts(search);
-        if (!search.isEmpty()) {
-            List<String> arrImages = new ArrayList<>();
-            for (Product p : products) {
-                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
-                arrImages.add(byte64);
-            }
-            model.addAttribute("shoes", products);
-            model.addAttribute("images", arrImages);
+        if (!search.isEmpty() ) {
+            searchService.getSearchProducts(model, products);
             return "sneaker_searchpage";
         } else {
             List<Product> productList = searchService.getAllProducts();
