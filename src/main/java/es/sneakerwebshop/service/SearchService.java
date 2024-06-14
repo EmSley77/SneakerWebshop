@@ -4,10 +4,14 @@ package es.sneakerwebshop.service;
  * 2024-06-12
  * Service for everything that has with searching to do
  */
+
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -41,8 +45,28 @@ public class SearchService {
         return productRepository.findByBrandContaining(s);
     }
 
+    public void getProductCategory(String s,List<Product> products , Model model) {
+        products = getByCategorySearch(s);
+        if (!products.isEmpty()) {
+            List<String> arrImages = new ArrayList<>();
+            for (Product p : products) {
+                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
+                arrImages.add(byte64);
+            }
+            model.addAttribute("shoes", products);
+            model.addAttribute("images", arrImages);
+        }
+    }
 
-
+    public void getProductsByBrand(Model model, List<Product> products) {
+        List<String> arrImages = new ArrayList<>();
+        for (Product p : products) {
+            String byte64 = Base64.getEncoder().encodeToString(p.getImage());
+            arrImages.add(byte64);
+        }
+        model.addAttribute("shoes", products);
+        model.addAttribute("images", arrImages);
+    }
 
 
 }

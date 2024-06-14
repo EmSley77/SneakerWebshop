@@ -55,20 +55,14 @@ public class SearchController {
 
     @GetMapping("sneaker-category")
     public String getByCategory(String s, Model model) {
-        List<Product> products = searchService.getByCategorySearch(s);
-        if (!products.isEmpty()) {
-            // TODO: make this into a own method, to get products and their image
-            List<String> arrImages = new ArrayList<>();
-            for (Product p : products) {
-                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
-                arrImages.add(byte64);
-            }
-            model.addAttribute("shoes", products);
-            model.addAttribute("images", arrImages);
+        List<Product> product = searchService.getByCategorySearch(s);
+        if (!product.isEmpty()) {
+            searchService.getProductCategory(s, product, model);
             return "sneaker_searchpage";
+        } else {
+            model.addAttribute("emptyList", "there is nothing to get");
+            return "sneaker_homepage";
         }
-        model.addAttribute("emptyList", "there is nothing to get");
-        return "sneaker_homepage";
     }
 
 
@@ -76,14 +70,7 @@ public class SearchController {
     public String getByBrand(String s, Model model) {
         List<Product> products = searchService.getByBrandSearch(s);
         if (!products.isEmpty()) {
-            // TODO: make this into a own method, to get products and their image
-            List<String> arrImages = new ArrayList<>();
-            for (Product p : products) {
-                String byte64 = Base64.getEncoder().encodeToString(p.getImage());
-                arrImages.add(byte64);
-            }
-            model.addAttribute("shoes", products);
-            model.addAttribute("images", arrImages);
+            searchService.getProductsByBrand(model, products);
             return "sneaker_searchpage";
         }
         model.addAttribute("emptyBrandList", "there is nothing to get");
