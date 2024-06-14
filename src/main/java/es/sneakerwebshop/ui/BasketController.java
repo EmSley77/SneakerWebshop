@@ -8,6 +8,7 @@ package es.sneakerwebshop.ui;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.BasketService;
 import es.sneakerwebshop.service.SearchService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,6 +86,16 @@ public class BasketController {
         return "sneaker_basketpage";
 
     }
+
+
+    @GetMapping("sneaker-get-basket-total")
+    public String getBasket(Model model) {
+        basketService.getBasket(model);
+        model.addAttribute("totalCost", basketService.getBasketTotalCost());
+        return "sneaker_confirmbasketpage";
+    }
+
+
 }
 
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm-Basket-Page</title>
+</head>
+<body>
+<a>Total: <span th:text="${totalCost}"></span></a>
+<table>
+    <tbody>
+    <tr th:each="p, image : ${basket}">
+        <td th:text="${p.getName()}"></td>
+        <td th:text="${p.getStock()}"></td>
+        <td th:text="${p.getProductCost()}"></td>
+        <td th:if="${images != null and !images.isEmpty()}">
+            <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

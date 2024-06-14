@@ -153,4 +153,14 @@ public class BasketService {
         }
     }
 
+    //get basket total Price
+    public int getBasketTotalCost() {
+        int total = 0;
+        for (Product product: basket) {
+            total += product.getProductCost();
+
+        }
+        return total;
+    }
+
 }
