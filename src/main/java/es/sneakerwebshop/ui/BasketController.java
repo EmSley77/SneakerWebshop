@@ -95,6 +95,8 @@ public class BasketController {
         return "sneaker_confirmbasketpage";
     }
 
+    //TODO: begin on order service, getting a notification when comepleting successful order, admin side, view orders, orderdetails with products and such
+
 
 }
 
