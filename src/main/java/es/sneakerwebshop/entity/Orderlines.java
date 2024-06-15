@@ -36,4 +36,13 @@ public class Orderlines {
     @Column(name = "order_time", nullable = false)
     private Timestamp orderTime;
 
+    public Orderlines(int orderId, int productId, int amount, int totalCost, byte[] productImage, byte[] productName, Timestamp orderTime) {
+        this.orderId = orderId;
+        this.productId = productId;
+        this.amount = amount;
+        this.totalCost = totalCost;
+        this.productImage = productImage;
+        this.productName = productName;
+        this.orderTime = orderTime;
+    }
 }

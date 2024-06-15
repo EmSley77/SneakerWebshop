@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -48,7 +50,13 @@ public class OrderController {
         List<Orderlines> orderlines = orderService.getOrderDetails(orderId);
 
         if (!orderlines.isEmpty()) {
+            List<String> arrImg = new ArrayList<>();
+            for (Orderlines o : orderlines) {
+                String base64img = Base64.getEncoder().encodeToString(o.getProductImage());
+                arrImg.add(base64img);
+            }
             model.addAttribute("orderLines", orderlines);
+            model.addAttribute("images",arrImg);
             return "sneaker_personalorderdetailspage";
         }
         else {
