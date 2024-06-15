@@ -26,7 +26,8 @@ public class Orderlines {
     @Basic
     @Column(name = "total_cost", nullable = false)
     private int totalCost;
-    @Basic
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "product_image", nullable = false)
     private byte[] productImage;
     @Basic

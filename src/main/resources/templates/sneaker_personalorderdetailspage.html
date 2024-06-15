@@ -3,24 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>My orderdetails</title>
+    <style>
+        .img {
+            height: 200px;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
- <div>
-     <table>
-         <thead>
-         <tr th:each=" ol : ${orderLines}">
-             <td th:text="${ol.getProductId()}"></td>
-             <td th:text="${ol.getAmount()}"></td>
-             <td th:text="${ol.getTotalCost()}"></td>
-             <td th:text="${ol.getOrderTime()}"></td>
-         </tr>
-         </thead>
-     </table>
+<div>
+    <table>
+        <thead>
+        <tr th:each=" ol, image : ${orderLines}">
+            <td th:text="${ol.getProductId()}"></td>
+            <td th:text="${ol.getProductName()}"></td>
+            <td th:text="${ol.getAmount()}"></td>
+            <td th:text="${ol.getTotalCost()}"></td>
+            <td th:text="${ol.getOrderTime()}">
+            <td th:if="${images != null and !images.isEmpty()}">
+                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+            </td>
+
+        </tr>
+        </thead>
+    </table>
 
 
- </div>
- <form action="sneaker-get-my-orders" method="get">
-     <button type="submit">my orders</button>
- </form>
+</div>
+<form action="sneaker-get-my-orders" method="get">
+    <button type="submit">my orders</button>
+</form>
 </body>
 </html>
