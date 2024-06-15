@@ -43,7 +43,9 @@ public class OrderService {
 
     // Make order
     public String makeOrder(String email, String password) {
+
         User user = userRepository.findByEmailAndPassword(email, password);
+
         if (user == null) {
             return "No user found with email " + email + "and password " + password;
         }
@@ -56,7 +58,6 @@ public class OrderService {
         order.setOrderStatus("Pending");
 
         orderRepository.save(order);
-
 
         //do not break in this loop, we want to get all the products not the first only.
         for (Product p : basketService.getBasket()) {
@@ -75,7 +76,6 @@ public class OrderService {
         }
 
         return "Order has been successfully made";
-
 
     }
 
