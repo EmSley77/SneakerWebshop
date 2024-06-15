@@ -7,10 +7,14 @@ package es.sneakerwebshop.service;
 
 import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Orderlines;
+import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
+import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,18 +22,41 @@ public class OrderService {
 
     private OrderRepository orderRepository;
 
+    private UserRepository userRepository;
+
     private OrderlineRepository orderlineRepository;
+
+    private BasketService basketService;
 
     private UserService userService;
 
-    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService) {
+    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService) {
         this.orderRepository = orderRepository;
         this.orderlineRepository = orderlineRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
+        this.basketService = basketService;
     }
 
     // Make order
+    public String makeOrder(String email, String password) {
+        User user = userRepository.findByEmailAndPassword(email, password);
+        if (user == null) {
+            return "No user found with email " + email + "and password " + password;
+        }
 
+        Order order = new Order();
+
+        order.setTotalCost(basketService.getBasketTotalCost());
+        order.setUserId(user.getUserId());
+        order.setOrderDate(Date.valueOf(LocalDate.now()));
+        order.setOrderStatus("Pending");
+
+
+
+
+
+    }
 
     // view order , admin
     public List<Order> getUserOrders(int userId) {
@@ -40,7 +67,6 @@ public class OrderService {
     public List<Order> getMyOrders() {
         return orderRepository.findOrdersByUserId(userService.getUserId());
     }
-
 
 
     // get order details, with order id, Admin and user
