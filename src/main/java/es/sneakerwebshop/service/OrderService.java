@@ -43,6 +43,11 @@ public class OrderService {
     }
 
     // Make order
+    //TODO: productFk was removed may need to fix that
+    //TODO: user details such as address, name, lastname, number and more need to be reeadonly and updateable in confirmorderpage
+    //TODO: make when ordering more realife alike and not so stale
+    //TODO: view everything on last page before ordering everything
+    //TODO: fix better layout in webpages
     @Transactional
     public String makeOrder(String email, String password) {
 
