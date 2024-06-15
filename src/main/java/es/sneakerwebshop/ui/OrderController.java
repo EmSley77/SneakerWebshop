@@ -3,6 +3,7 @@ package es.sneakerwebshop.ui;
  * Emanuel sleyman
  * 2024-06-15
  * controller used for all order requests
+ * TODO: need to add image , product name to make view orders more readable
  */
 import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Orderlines;
