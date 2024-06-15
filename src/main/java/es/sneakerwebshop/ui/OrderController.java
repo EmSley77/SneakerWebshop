@@ -12,6 +12,7 @@ import es.sneakerwebshop.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -62,6 +63,18 @@ public class OrderController {
         else {
             model.addAttribute("orderList", orderService.getMyOrders());
             return "sneaker_ordersmadepage";
+        }
+    }
+
+    @PostMapping("sneaker-make-order")
+    public String makeOrder(@RequestParam String email, @RequestParam String password, Model model) {
+        String result = orderService.makeOrder(email, password);
+        if (result.equals("Order has been successfully made")) {
+            model.addAttribute("orderresult", result);
+            return "sneaker_orderconfirmpage";
+        } else {
+            model.addAttribute("orderresult", result);
+            return "sneaker_confirmbasketpage";
         }
     }
 }
