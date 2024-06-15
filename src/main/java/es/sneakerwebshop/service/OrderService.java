@@ -57,19 +57,23 @@ public class OrderService {
 
         orderRepository.save(order);
 
-        Orderlines orderlines = new Orderlines();
 
+        //do not break in this loop, we want to get all the products not the first only.
         for (Product p : basketService.getBasket()) {
+            //create an orderline for each product
+            Orderlines orderlines = new Orderlines();
+
             orderlines.setOrderId(order.getOrderId());
             orderlines.setOrderTime(Timestamp.valueOf(LocalDateTime.now()));
             orderlines.setTotalCost(p.getProductCost());
             orderlines.setAmount(p.getStock());
             orderlines.setProductImage(p.getImage());
             orderlines.setProductName(p.getName());
+            //save after first product has been filled and move on the next product in the basket, or list
+            orderlineRepository.save(orderlines);
 
         }
 
-        orderlineRepository.save(orderlines);
         return "Order has been successfully made";
 
 
