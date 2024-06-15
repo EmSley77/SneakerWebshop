@@ -20,20 +20,31 @@ public class OrderService {
 
     private OrderlineRepository orderlineRepository;
 
-    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository) {
+    private UserService userService;
+
+    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService) {
         this.orderRepository = orderRepository;
         this.orderlineRepository = orderlineRepository;
+        this.userService = userService;
     }
 
     // Make order
 
 
-    // view order , admin & user
+    // view order , admin
     public List<Order> getUserOrders(int userId) {
         return orderRepository.findOrdersByUserId(userId);
     }
 
+    //users gets orders and view button in account oage
+    public List<Order> getMyOrders() {
+        return orderRepository.findOrdersByUserId(userService.getUserId());
+    }
+
+
+
     // get order details, with order id, Admin and user
+    //use order id to get order detail
     public List<Orderlines> getOrderDetails(int orderId) {
         return orderlineRepository.findOrderLinesByOrderId(orderId);
     }

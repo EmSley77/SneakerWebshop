@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+</head>
+<body>
+<div class="container">
+
+    <table>
+        <thead>
+        <tr th:each="o : ${orderList}">
+            <td th:text="${o.getOrderId()}"></td>
+            <td th:text="${o.getTotalCost()}"></td>
+            <td th:text="${o.getOrderStatus()}"></td>
+            <td th:text="${o.getOrderDate()}"></td>
+            <td th:text="${o.getOrderId()}"></td>
+            <td>
+                <form action="sneaker-get-my-orderdetails" method="get">
+                    <input type="hidden" name="orderId" th:value="${o.getOrderId()}">
+                    <button type="submit">order detail</button>
+                </form>
+            </td>
+
+        </tr>
+        </thead>
+    </table>
+
+
+    <form action="sneaker-account" method="get">
+        <button type="submit">account</button>
+    </form>
+</div>
+</body>
+</html>
