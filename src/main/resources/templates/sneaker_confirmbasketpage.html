@@ -26,10 +26,19 @@
         </tbody>
     </table>
 </div>
-
-<form action="sneaker-get-basket" method="get">
-    <button type="submit">edit basket</button>
+<form action="sneaker-make-order" method="post">
+    <input type="text" name="email" placeholder="Enter Email" required> <br>
+    <input type="password" name="password" placeholder="Enter Password" required> <br>
+    <button type="submit">order</button>
+    <a><span th:text="${orderresult}"></span></a>
 </form>
+
+
+<form action="sneaker-get-basket-total" method="get">
+    <a>Not happy with order? return here</a>
+    <button type="submit">return</button>
+</form>
+
 
 </body>
 </html>

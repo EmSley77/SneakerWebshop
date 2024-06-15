@@ -13,6 +13,7 @@ import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
 import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -42,6 +43,7 @@ public class OrderService {
     }
 
     // Make order
+    @Transactional
     public String makeOrder(String email, String password) {
 
         User user = userRepository.findByEmailAndPassword(email, password);
