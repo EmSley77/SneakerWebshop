@@ -32,12 +32,12 @@ public class Orderlines {
     private byte[] productImage;
     @Basic
     @Column(name = "product_name", nullable = false)
-    private byte[] productName;
+    private String productName;
     @Basic
     @Column(name = "order_time", nullable = false)
     private Timestamp orderTime;
 
-    public Orderlines(int orderId, int productId, int amount, int totalCost, byte[] productImage, byte[] productName, Timestamp orderTime) {
+    public Orderlines(int orderId, int productId, int amount, int totalCost, byte[] productImage, String productName, Timestamp orderTime) {
         this.orderId = orderId;
         this.productId = productId;
         this.amount = amount;

@@ -7,6 +7,7 @@ package es.sneakerwebshop.service;
 
 import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Orderlines;
+import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
@@ -14,7 +15,9 @@ import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -52,8 +55,22 @@ public class OrderService {
         order.setOrderDate(Date.valueOf(LocalDate.now()));
         order.setOrderStatus("Pending");
 
+        orderRepository.save(order);
 
+        Orderlines orderlines = new Orderlines();
 
+        for (Product p : basketService.getBasket()) {
+            orderlines.setOrderId(order.getOrderId());
+            orderlines.setOrderTime(Timestamp.valueOf(LocalDateTime.now()));
+            orderlines.setTotalCost(p.getProductCost());
+            orderlines.setAmount(p.getStock());
+            orderlines.setProductImage(p.getImage());
+            orderlines.setProductName(p.getName());
+
+        }
+
+        orderlineRepository.save(orderlines);
+        return "Order has been successfully made";
 
 
     }
