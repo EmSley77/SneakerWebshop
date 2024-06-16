@@ -124,5 +124,17 @@ public class AdminService {
         }
     }
 
+    //get product after editing
+    public void getProductsAfterEditing(Model model) {
+        List<Product> allProducts = getAllProducts();
+        List<String> arrImg = new ArrayList<>();
+        for (Product product : allProducts) {
+            String base64Img = Base64.getEncoder().encodeToString(product.getImage());
+            arrImg.add(base64Img);
+        }
+        model.addAttribute("allProductList", allProducts);
+        model.addAttribute("images", arrImg);
+    }
+
 
 }

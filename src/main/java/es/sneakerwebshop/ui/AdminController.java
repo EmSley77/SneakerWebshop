@@ -130,14 +130,7 @@ public class AdminController {
             @RequestParam int productId,
             Model model) {
         String result = adminService.editProduct(productCost, stock, shoeSize, image, productId);
-        List<Product> allProducts = adminService.getAllProducts();
-        List<String> arrImg = new ArrayList<>();
-        for (Product product : allProducts) {
-            String base64Img = Base64.getEncoder().encodeToString(product.getImage());
-            arrImg.add(base64Img);
-        }
-        model.addAttribute("allProductList", allProducts);
-        model.addAttribute("images", arrImg);
+        adminService.getProductsAfterEditing(model);
         model.addAttribute("result", result);
         return "sneaker_admin_allproductspage";
     }
