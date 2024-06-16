@@ -2,42 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin page</title>
+    <title>Admin Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .register, .product-add {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form select, form button {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #666ecb;
+            color: white;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #28254b;
+        }
+        a {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        span {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="register">
         <form action="sneaker-register-admin" method="post">
-
-            <input type="text" name="name" placeholder="Enter Name" required> <br>
-            <input type="text" name="lastname" placeholder="Enter Lastname" required> <br>
-            <input type="text" name="email" placeholder="Enter Email" required> <br>
-            <input type="text" name="repeatEmail" placeholder="Repeat Email" required> <br>
-
-            <input type="text" name="password" placeholder="Enter Password" required> <br>
-            <input type="password" name="repeatPassword" placeholder="Repeat Password" required> <br>
-
-            <input type="number" name="telephoneNumber" placeholder="Enter Cellphone" required> <br>
-            <input type="text" name="address" placeholder="Enter Your Address" required> <br>
+            <a>REGISTER NEW ADMIN</a>
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="text" name="lastname" placeholder="Enter Lastname" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="email" name="repeatEmail" placeholder="Repeat Email" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <input type="password" name="repeatPassword" placeholder="Repeat Password" required>
+            <input type="tel" name="telephoneNumber" placeholder="Enter Cellphone" required>
+            <input type="text" name="address" placeholder="Enter Your Address" required>
             <button type="submit">Register</button>
-            <br>
-
-            <a> <span th:text="${result}"></span></a>
+            <span th:text="${result}"></span>
         </form>
     </div>
 
-
     <div class="product-add">
-
+        <a>REGISTER NEW PRODUCT</a>
         <form action="sneaker-add-product" method="post" enctype="multipart/form-data">
-            <a>Category</a> <br>
+            <a>Category</a>
             <select name="category" required>
                 <option value="Boot">Boot</option>
                 <option value="Sneaker">Sneaker</option>
                 <option value="Designer">Designer</option>
                 <option value="Sport">Sport</option>
-            </select> <br>
-            <a>Brand</a> <br>
+            </select>
+            <a>Brand</a>
             <select name="brand" required>
                 <option value="Nike">Nike</option>
                 <option value="Adidas">Adidas</option>
@@ -46,17 +92,24 @@
                 <option value="New-Balance">New-Balance</option>
                 <option value="Asics">Asics</option>
                 <option value="BOSS">BOSS</option>
-                <option value="Loubutin">Loubutin</option>
-            </select> <br>
-            <input type="text" name="name" placeholder="Enter Name" required> <br>
-            <input type="number" name="productCost" placeholder="Enter Cost" required> <br>
-            <input type="number" name="stock" placeholder="Enter Stock Amount" required> <br>
-            <input type="number" name="shoeSize" placeholder="Enter size" required> <br>
-            <input type="file" name="image" required> <br>
-            <button type="submit">Add product</button>
+                <option value="Louboutin">Louboutin</option>
+            </select>
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="number" name="productCost" placeholder="Enter Cost" required>
+            <input type="number" name="stock" placeholder="Enter Stock Amount" required>
+            <input type="number" name="shoeSize" placeholder="Enter Size" required>
+            <a>ADD IMAGE</a>
+            <input type="file" name="image" required>
+            <button type="submit">Add Product</button>
         </form>
     </div>
 
+    <div class="all-products">
+        <a>VIEW ALL REGISTERED PRODUCTS</a>
+        <form action="sneaker-get-all-products-admin" method="get">
+            <button type="submit">Products</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

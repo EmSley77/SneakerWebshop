@@ -5,20 +5,26 @@ package es.sneakerwebshop.service;
  * this class is a service that is responsible for Admin users
  */
 
+import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.entity.User;
+import es.sneakerwebshop.repository.ProductRepository;
 import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class AdminService {
 
     private UserRepository userRepository;
 
-    public AdminService(UserRepository userRepository) {
+    private ProductRepository productRepository;
+
+    public AdminService(UserRepository userRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
 
     public String createAdminAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
@@ -49,6 +55,23 @@ public class AdminService {
         }
     }
 
+
+    //amdmin gets all products
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+
+    //delete product,
+    //TODO: may need to change on delete act in db to cascade
+    public String deleteProduct(int productId) {
+        try {
+            productRepository.deleteById(productId);
+            return "product deleted";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "could not delete item";
+        }
+    }
 
 
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        .img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        form {
+            margin-top: 20px;
+        }
+        form button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        form button:hover {
+            background-color: #007bb5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s, image : ${allProductList}">
+            <td th:text="${s.getBrand()}"></td>
+            <td th:text="${s.getName()}"></td>
+            <td th:text="${s.getProductCost()}"></td>
+            <td th:if="${images != null and !images.isEmpty()}">
+                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="sneaker-admin-page" method="get">
+        <a>Return to Admin Page</a>
+        <button type="submit">Return</button>
+    </form>
+</div>
+
+</body>
+</html>

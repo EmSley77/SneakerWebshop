@@ -21,29 +21,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("sneaker-add-product")
-    public String addProduct(
-            @RequestParam String category,
-            @RequestParam String brand,
-            @RequestParam String name,
-            @RequestParam int productCost,
-            @RequestParam int stock,
-            @RequestParam double shoeSize,
-            @RequestParam MultipartFile image,
-            Model model) {
-
-
-        String result = productService.addProduct(category, brand, name, productCost, stock, shoeSize, image);
-        if (result.equals("Shoe was successfully added")) {
-            model.addAttribute("result", result);
-            return "sneaker_adminpage";
-        } else {
-            model.addAttribute("result", result);
-            return "sneaker_adminpage";
-        }
-
-
-    }
 
 
 }
