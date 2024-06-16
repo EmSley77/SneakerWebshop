@@ -2,47 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account page</title>
+    <title>Account Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .account {
+            width: 80%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .account a {
+            font-weight: bold;
+            color: #333;
+        }
+        .account input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .account button {
+            background-color: #2c1e6c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .account button:hover {
+            background-color: #6d348d;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+<div class="account">
+    <form action="sneaker-account-update" method="post">
+        <label>Name: <span th:text="${account.getName()}"></span></label>
+        <input type="text" name="newName" placeholder="Enter new Name">
 
-<div>
-    <div class="account">
-        <form action="sneaker-account-update" method="post">
-            <a>Name: <span th:text="${account.getName()}"></span></a> <br>
-            <input type="text" name="newName" placeholder="Enter new Name"> <br> <br>
-            <a>Lastname: <span th:text="${account.getLastname()}"></span></a> <br>
-            <input type="text" name="newLastname" placeholder="Enter new Lastname"> <br> <br>
+        <label>Lastname: <span th:text="${account.getLastname()}"></span></label>
+        <input type="text" name="newLastname" placeholder="Enter new Lastname">
 
-            <a>Email: <span th:text="${account.getEmail()}"></span></a> <br>
-            <input type="text" name="newEmail" placeholder="Enter new Email"> <br> <br>
+        <label>Email: <span th:text="${account.getEmail()}"></span></label>
+        <input type="email" name="newEmail" placeholder="Enter new Email">
 
-            <a>Password: <span th:text="${account.getPassword()}"></span></a> <br>
-            <input type="text" name="newPassword" placeholder="Enter new Password"><br>
-            <input type="password" name="repeatPassword" placeholder="repeat new Password"> <br> <br>
+        <label>Password: <span th:text="${account.getPassword()}"></span></label>
+        <input type="password" name="newPassword" placeholder="Enter new Password">
+        <input type="password" name="repeatPassword" placeholder="Repeat new Password">
 
+        <label>Address: <span th:text="${account.getAddress()}"></span></label>
+        <input type="text" name="newAddress" placeholder="Enter new Address">
 
-            <a>Address: <span th:text="${account.getAddress()}"></span></a> <br>
-            <input type="text" name="newAddress" placeholder="Enter new Address"> <br> <br>
+        <label>Tel: <span th:text="${account.getTelephoneNumber()}"></span></label>
+        <input type="number" name="newTelephoneNumber" placeholder="Enter new Telephone">
 
-            <a>Tel: <span th:text="${account.getTelephoneNumber()}"></span></a> <br>
-            <input type="number" name="newTelephoneNumber" placeholder="Enter new Telephone"> <br> <br>
+        <label>Registration Date: <span th:text="${account.getRegistrationDate()}"></span></label>
+        <button type="submit">Edit</button>
+        <p><span th:text="${result}"></span></p>
+    </form>
 
-            <a>Registration date: <span th:text="${account.getRegistrationDate()}"></span></a> <br>
-            <button type="submit">edit</button> <br>
-            <a><span th:text="${result}"></span></a>
+    <form action="sneaker-homepage" method="get">
+        <button type="submit">Homepage</button>
+    </form>
 
-        </form>
-
-        <form action="sneaker-homepage" method="get">
-            <button type="submit">Homepage</button>
-        </form>
-
-        <form action="sneaker-get-my-orders" method="get">
-            <button type="submit">my orders</button>
-        </form>
-
-    </div>
+    <form action="sneaker-get-my-orders" method="get">
+        <button type="submit">My Orders</button>
+    </form>
 </div>
 </body>
 </html>
