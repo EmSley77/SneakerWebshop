@@ -8,7 +8,6 @@ package es.sneakerwebshop.ui;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.AdminService;
 import es.sneakerwebshop.service.ProductService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -128,31 +127,18 @@ public class AdminController {
             @RequestParam(required = false) Integer stock,
             @RequestParam(required = false) Double shoeSize,
             @RequestParam(required = false) MultipartFile image,
-            @RequestParam(required = false) int productId,
+            @RequestParam int productId,
             Model model) {
         String result = adminService.editProduct(productCost, stock, shoeSize, image, productId);
-        if (result.equals("updated product")) {
-            List<Product> allProducts = adminService.getAllProducts();
-            List<String> arrImg = new ArrayList<>();
-            for (Product product : allProducts) {
-                String base64Img = Base64.getEncoder().encodeToString(product.getImage());
-                arrImg.add(base64Img);
-            }
-            model.addAttribute("allProductList", allProducts);
-            model.addAttribute("images", arrImg);
-            model.addAttribute("result", result);
-            return "sneaker_admin_allproductspage";
-        } else {
-            List<Product> allProducts = adminService.getAllProducts();
-            List<String> arrImg = new ArrayList<>();
-            for (Product product : allProducts) {
-                String base64Img = Base64.getEncoder().encodeToString(product.getImage());
-                arrImg.add(base64Img);
-            }
-            model.addAttribute("allProductList", allProducts);
-            model.addAttribute("images", arrImg);
-            model.addAttribute("result", result);
-            return "sneaker_admin_allproductspage";
+        List<Product> allProducts = adminService.getAllProducts();
+        List<String> arrImg = new ArrayList<>();
+        for (Product product : allProducts) {
+            String base64Img = Base64.getEncoder().encodeToString(product.getImage());
+            arrImg.add(base64Img);
         }
+        model.addAttribute("allProductList", allProducts);
+        model.addAttribute("images", arrImg);
+        model.addAttribute("result", result);
+        return "sneaker_admin_allproductspage";
     }
 }

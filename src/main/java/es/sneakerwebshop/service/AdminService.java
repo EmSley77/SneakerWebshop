@@ -111,7 +111,7 @@ public class AdminService {
                 product.setShoeSize(shoeSize);
             }
 
-            if (image != null) {
+            if (image != null && !image.isEmpty()) {
                 product.setImage(image.getBytes());
             }
 

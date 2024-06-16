@@ -85,29 +85,29 @@
         <tbody>
         <tr th:each="s, image : ${allProductList}">
             <form action="sneaker-admin-update-product" method="post" enctype="multipart/form-data" class="inline-form">
-                <td th:text="${s.getBrand()}"></td>
-                <td th:text="${s.getName()}"></td>
+                <td th:text="${s.brand}"></td>
+                <td th:text="${s.name}"></td>
                 <td>
-                    <span th:text="${s.getProductCost()}"></span>
+                    <span th:text="${s.productCost}"></span>
                     <br>
                     <input type="number" name="productCost" placeholder="Edit cost">
                 </td>
-                <td th:if="${images != null and !images.isEmpty()}">
-                    <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+                <td>
+                    <img th:if="${images[image.index] != null}" th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
                     <br>
                     <input type="file" name="image">
                 </td>
                 <td>
-                    <span th:text="${s.getStock()}"></span>
+                    <span th:text="${s.stock}"></span>
                     <br>
                     <input type="number" name="stock" placeholder="Edit stock">
                 </td>
                 <td class="actions">
-                    <input type="hidden" name="productId" th:value="${s.getProductId()}">
+                    <input type="hidden" name="productId" th:value="${s.productId}">
                     <button type="submit">Edit</button>
             </form>
             <form action="sneaker-admin-delete-product" method="post">
-                <input type="hidden" name="id" th:value="${s.getProductId()}">
+                <input type="hidden" name="id" th:value="${s.productId}">
                 <button type="submit">Delete</button>
             </form>
             </td>
