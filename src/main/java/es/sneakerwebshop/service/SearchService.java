@@ -34,7 +34,6 @@ public class SearchService {
         return productRepository.findAll();
     }
 
-
     //category search
     public List<Product> getByCategorySearch(String s) {
         return productRepository.findByCategoryContaining(s);
@@ -45,7 +44,7 @@ public class SearchService {
         return productRepository.findByBrandContaining(s);
     }
 
-    public void getProductCategory(String s,List<Product> products , Model model) {
+    public void getProductCategory(String s, List<Product> products, Model model) {
         products = getByCategorySearch(s);
         if (!products.isEmpty()) {
             List<String> arrImages = new ArrayList<>();

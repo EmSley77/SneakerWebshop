@@ -66,7 +66,7 @@ public class AdminService {
     }
 
     //delete product,
-    //TODO: may need to change on delete act in db to cascade
+    //TODO: may need to change on delete act in db to cascade, NEEDS TO BE TESTED! 2024.06.16
     public String deleteProduct(int productId) {
         try {
             productRepository.deleteById(productId);
@@ -90,7 +90,7 @@ public class AdminService {
         }
     }
 
-    //TODO: edit product
+    //edit product
     public String editProduct(Integer productCost, Integer stock, Double shoeSize, MultipartFile image, int productId) {
         try {
 

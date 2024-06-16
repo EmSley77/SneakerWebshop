@@ -32,7 +32,6 @@ public class BasketService {
 
 
     // add product to basket
-    //TODO: if product already exists in basket just increse by 1 instead of adding a new object into list
     public void addProductToBasket(int productId) {
 
         Product product = productRepository.findProductByProductId(productId);
@@ -85,7 +84,6 @@ public class BasketService {
 
 
     //decrease product amount, if <1 delete from basket
-    //TODO: must finish this, not working completely correct
     public void decreaseAmountInBasket(int productId) {
 
         Product p = productRepository.findProductByProductId(productId);
