@@ -11,6 +11,7 @@ import es.sneakerwebshop.repository.ProductRepository;
 import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -90,12 +91,34 @@ public class AdminService {
     }
 
     //TODO: edit product
-    public String editProduct(int productCost, int stock, double shoeSize, byte[] image) {
+    public String editProduct(Integer productCost, Integer stock, Double shoeSize, MultipartFile image, int productId) {
         try {
 
+            Product product = productRepository.findProductByProductId(productId);
+            if (product == null) {
+                return "cant find product to edit";
+            }
 
+            if (productCost != null) {
+                product.setProductCost(productCost);
+            }
 
-        }catch (Exception e) {
+            if (stock != null) {
+                product.setStock(stock);
+            }
+
+            if (shoeSize != null) {
+                product.setShoeSize(shoeSize);
+            }
+
+            if (image != null) {
+                product.setImage(image.getBytes());
+            }
+
+            productRepository.save(product);
+            return "updated product";
+
+        } catch (Exception e) {
             e.printStackTrace();
             return "could not update product";
         }
