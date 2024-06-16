@@ -10,9 +10,12 @@ import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.ProductRepository;
 import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -70,6 +73,19 @@ public class AdminService {
         } catch (Exception e) {
             e.printStackTrace();
             return "could not delete item";
+        }
+    }
+
+    //get products refactored controller method
+    public void getProducts(Model model, List<Product> allProducts) {
+        if (!allProducts.isEmpty()) {
+            List<String> arrImg = new ArrayList<>();
+            for (Product product : allProducts) {
+                String base64Img = Base64.getEncoder().encodeToString(product.getImage());
+                arrImg.add(base64Img);
+            }
+            model.addAttribute("allProductList", allProducts);
+            model.addAttribute("images", arrImg);
         }
     }
 

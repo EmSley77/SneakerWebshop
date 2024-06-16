@@ -73,6 +73,12 @@
             <td th:if="${images != null and !images.isEmpty()}">
                 <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
             </td>
+            <td>
+                <form action="sneaker-admin-delete-product" method="post">
+                    <input type="hidden" name="id" th:value="${s.getProductId()}">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

@@ -8,6 +8,7 @@ package es.sneakerwebshop.ui;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.AdminService;
 import es.sneakerwebshop.service.ProductService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class AdminController {
     }
 
     @GetMapping("sneaker-admin-page")
-    public String getAdminPage(){
+    public String getAdminPage() {
         return "sneaker_adminpage";
     }
 
@@ -104,6 +105,20 @@ public class AdminController {
     }
 
     //delete product
+    @PostMapping("sneaker-admin-delete-product")
+    public String deleteProduct(@RequestParam int id, Model model) {
+        String result = adminService.deleteProduct(id);
+        if (result.equals("product deleted")) {
+            List<Product> allProducts = adminService.getAllProducts();
+            adminService.getProducts(model, allProducts);
+            return "sneaker_admin_allproductspage";
+        } else {
+            List<Product> allProducts = adminService.getAllProducts();
+            adminService.getProducts(model, allProducts);
+            model.addAttribute("result", result);
+            return "sneaker_admin_allproductspage";
 
+        }
+    }
 
 }
