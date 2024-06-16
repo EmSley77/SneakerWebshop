@@ -90,7 +90,16 @@ public class AdminService {
     }
 
     //TODO: edit product
+    public String editProduct(int productCost, int stock, double shoeSize, byte[] image) {
+        try {
 
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "could not update product";
+        }
+    }
 
 
 }
