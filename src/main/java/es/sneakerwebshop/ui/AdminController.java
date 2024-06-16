@@ -121,4 +121,38 @@ public class AdminController {
         }
     }
 
+    //update product
+    @PostMapping("sneaker-admin-update-product")
+    public String updateProduct(
+            @RequestParam(required = false) Integer productCost,
+            @RequestParam(required = false) Integer stock,
+            @RequestParam(required = false) Double shoeSize,
+            @RequestParam(required = false) MultipartFile image,
+            @RequestParam(required = false) int productId,
+            Model model) {
+        String result = adminService.editProduct(productCost, stock, shoeSize, image, productId);
+        if (result.equals("updated product")) {
+            List<Product> allProducts = adminService.getAllProducts();
+            List<String> arrImg = new ArrayList<>();
+            for (Product product : allProducts) {
+                String base64Img = Base64.getEncoder().encodeToString(product.getImage());
+                arrImg.add(base64Img);
+            }
+            model.addAttribute("allProductList", allProducts);
+            model.addAttribute("images", arrImg);
+            model.addAttribute("result", result);
+            return "sneaker_admin_allproductspage";
+        } else {
+            List<Product> allProducts = adminService.getAllProducts();
+            List<String> arrImg = new ArrayList<>();
+            for (Product product : allProducts) {
+                String base64Img = Base64.getEncoder().encodeToString(product.getImage());
+                arrImg.add(base64Img);
+            }
+            model.addAttribute("allProductList", allProducts);
+            model.addAttribute("images", arrImg);
+            model.addAttribute("result", result);
+            return "sneaker_admin_allproductspage";
+        }
+    }
 }

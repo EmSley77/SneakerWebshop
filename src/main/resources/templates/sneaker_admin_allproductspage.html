@@ -11,7 +11,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             background: white;
             padding: 20px;
@@ -27,6 +27,7 @@
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
+            vertical-align: middle;
         }
         table th {
             background-color: #f2f2f2;
@@ -51,6 +52,20 @@
         form button:hover {
             background-color: #007bb5;
         }
+        .inline-form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .inline-form input[type="number"],
+        .inline-form input[type="file"] {
+            padding: 5px;
+        }
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
@@ -63,29 +78,45 @@
             <th>Name</th>
             <th>Price</th>
             <th>Image</th>
+            <th>Stock</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="s, image : ${allProductList}">
-            <td th:text="${s.getBrand()}"></td>
-            <td th:text="${s.getName()}"></td>
-            <td th:text="${s.getProductCost()}"></td>
-            <td th:if="${images != null and !images.isEmpty()}">
-                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
-            </td>
-            <td>
-                <form action="sneaker-admin-delete-product" method="post">
-                    <input type="hidden" name="id" th:value="${s.getProductId()}">
-                    <button type="submit">delete</button>
-                </form>
+            <form action="sneaker-admin-update-product" method="post" enctype="multipart/form-data" class="inline-form">
+                <td th:text="${s.getBrand()}"></td>
+                <td th:text="${s.getName()}"></td>
+                <td>
+                    <span th:text="${s.getProductCost()}"></span>
+                    <br>
+                    <input type="number" name="productCost" placeholder="Edit cost">
+                </td>
+                <td th:if="${images != null and !images.isEmpty()}">
+                    <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+                    <br>
+                    <input type="file" name="image">
+                </td>
+                <td>
+                    <span th:text="${s.getStock()}"></span>
+                    <br>
+                    <input type="number" name="stock" placeholder="Edit stock">
+                </td>
+                <td class="actions">
+                    <input type="hidden" name="productId" th:value="${s.getProductId()}">
+                    <button type="submit">Edit</button>
+            </form>
+            <form action="sneaker-admin-delete-product" method="post">
+                <input type="hidden" name="id" th:value="${s.getProductId()}">
+                <button type="submit">Delete</button>
+            </form>
             </td>
         </tr>
         </tbody>
     </table>
 
     <form action="sneaker-admin-page" method="get">
-        <a>Return to Admin Page</a>
-        <button type="submit">Return</button>
+        <button type="submit">Return to Admin Page</button>
     </form>
 </div>
 
