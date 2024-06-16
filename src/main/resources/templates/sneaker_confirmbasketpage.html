@@ -2,43 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Confirm-Basket-Page</title>
+    <title>Confirm Basket Page</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
         .img {
             width: 200px;
             height: 200px;
+            object-fit: cover;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            background-color: #fff;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-<div>
-    <a>Total: <span th:text="${totalCost}"></span></a>
-    <table>
-        <tbody>
-        <tr th:each="p, image : ${basket}">
-            <td th:text="${p.getName()}"></td>
-            <td th:text="${p.getStock()}"></td>
-            <td th:text="${p.getProductCost()}"></td>
-            <td th:if="${images != null and !images.isEmpty()}">
-                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div>
+        <p>Total: <span th:text="${totalCost}">$200</span></p>
+        <table>
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Stock</th>
+                <th>Product Cost</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p, image : ${basket}">
+                <td th:text="${p.getName()}">Sample Product</td>
+                <td th:text="${p.getStock()}">10</td>
+                <td th:text="${p.getProductCost()}">$20</td>
+                <td th:if="${images != null and !images.isEmpty()}">
+                    <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form action="sneaker-make-order" method="post">
+        <input type="text" name="email" placeholder="Enter Email" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Order</button>
+        <p><span th:text="${orderresult}"></span></p>
+    </form>
+
+    <form action="sneaker-get-basket-total" method="get">
+        <a>Not happy with order? Return here</a>
+        <button type="submit">Return</button>
+    </form>
 </div>
-<form action="sneaker-make-order" method="post">
-    <input type="text" name="email" placeholder="Enter Email" required> <br>
-    <input type="password" name="password" placeholder="Enter Password" required> <br>
-    <button type="submit">order</button>
-    <a><span th:text="${orderresult}"></span></a>
-</form>
-
-
-<form action="sneaker-get-basket-total" method="get">
-    <a>Not happy with order? return here</a>
-    <button type="submit">return</button>
-</form>
-
-
 </body>
 </html>

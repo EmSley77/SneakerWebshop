@@ -3,6 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            text-align: center;
+        }
+        .container div {
+            margin: 15px 0;
+        }
+        .container form {
+            margin: 10px 0;
+        }
+        .container input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .container button {
+            background-color: #241c5b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        .container button:hover {
+            background-color: #62308a;
+        }
+    </style>
     <script type="text/javascript">
         function disableBack() {
             window.history.forward();
@@ -14,16 +64,13 @@
     </script>
 </head>
 <body>
-
 <div class="container">
-
     <div class="search">
         <form action="sneaker-get-search-sneaker" method="get">
             <input type="text" name="search" placeholder="Find shoes">
-            <button type="submit">search</button>
+            <button type="submit">Search</button>
         </form>
     </div>
-
 
     <div class="category">
         <form action="sneaker-category" method="get">
@@ -32,10 +79,9 @@
             <button type="submit" name="s" value="Slipper">Slippers</button>
             <button type="submit" name="s" value="Shoe">Shoes</button>
             <br>
-            <a> <span th:text="${emptyList}"></span></a>
+            <a><span th:text="${emptyList}"></span></a>
         </form>
     </div>
-
 
     <div class="brand">
         <form action="sneaker-brand" method="get">
@@ -44,24 +90,21 @@
             <button type="submit" name="s" value="Jordan">Jordan</button>
             <button type="submit" name="s" value="Yeezy">Yeezy</button>
             <br>
-            <a> <span th:text="${emptyBrandList}"></span></a>
+            <a><span th:text="${emptyBrandList}"></span></a>
         </form>
     </div>
 
     <div class="sign-out">
         <form action="sneaker-page" method="get">
-            <button type="submit">sign out</button>
+            <button type="submit">Sign Out</button>
         </form>
-
     </div>
 
     <div class="account">
         <form action="sneaker-account" method="get">
-            <button type="submit">account</button>
+            <button type="submit">Account</button>
         </form>
-
     </div>
-
 </div>
 </body>
 </html>

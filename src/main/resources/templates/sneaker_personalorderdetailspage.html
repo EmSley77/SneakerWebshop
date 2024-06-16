@@ -74,7 +74,7 @@
             <td th:text="${ol.getAmount()}"></td>
             <td th:text="${ol.getTotalCost()}"></td>
             <td th:text="${ol.getOrderTime()}"></td>
-            <td th:if="${images != null and !im ages.isEmpty()}">
+            <td th:if="${images != null and !images.isEmpty()}">
                 <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img" />
             </td>
         </tr>

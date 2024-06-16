@@ -2,18 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search-Page</title>
+    <title>Search Page</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .search {
+            margin-bottom: 20px;
+        }
+        .search input[type="text"] {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .search button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .search button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
         .img {
             width: 200px;
             height: 200px;
+            object-fit: cover;
+        }
+        .basket-page,
+        .homepage {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .basket-page button,
+        .homepage button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .basket-page button:hover,
+        .homepage button:hover {
+            background-color: #007bb5;
+        }
+        form {
+            display: inline;
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-
     <div class="search">
         <form action="sneaker-get-search-sneaker" method="get">
             <input type="text" name="search" placeholder="Find shoes">
@@ -22,7 +100,15 @@
     </div>
 
     <table class="shoes">
-
+        <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        </thead>
         <tbody>
         <tr th:each="s, image : ${shoes}">
             <td th:text="${s.getBrand()}"></td>
@@ -47,11 +133,11 @@
         </form>
     </div>
 
-
-    <form action="sneaker-homepage" method="get">
-        <button type="submit">Homepage</button>
-    </form>
+    <div class="homepage">
+        <form action="sneaker-homepage" method="get">
+            <button type="submit">Homepage</button>
+        </form>
+    </div>
 </div>
-
 </body>
 </html>
