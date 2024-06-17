@@ -170,7 +170,6 @@ public class AdminController {
     }
 
     @GetMapping("sneaker-get-pending-orders")
-
     public String getPendingOrders(Model model) {
 
         List<Order> allOrders = adminService.getPendingOrders();
@@ -182,6 +181,8 @@ public class AdminController {
         } else {
             return "sneaker_adminpage";
         }
-
     }
+
+
+    //TODO: change order status from 'pending' to 'Sent'
 }
