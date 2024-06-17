@@ -184,21 +184,18 @@ public class AdminController {
     }
 
 
-    //TODO: change order status from 'pending' to 'Sent'
+    // change order status from 'pending' to 'Sent'
     public String changeOrderStatus(@RequestParam int orderId, Model model) {
-        try {
-            String result = adminService.orderStatusSent(orderId);
-            if (result.equals("Order status changed to Sent")) {
-                List<Order> allOrders = adminService.getPendingOrders();
-                model.addAttribute("orderList", allOrders);
-                return "sneaker_admin_orderspage";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        String result = adminService.orderStatusSent(orderId);
+        if (result.equals("Order status changed to Sent")) {
             List<Order> allOrders = adminService.getPendingOrders();
             model.addAttribute("orderList", allOrders);
             return "sneaker_admin_orderspage";
-
+        } else {
+            List<Order> allOrders = adminService.getPendingOrders();
+            model.addAttribute("orderList", allOrders);
+            return "sneaker_admin_orderspage";
         }
+
     }
 }
