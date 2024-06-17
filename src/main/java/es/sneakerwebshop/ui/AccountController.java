@@ -40,11 +40,12 @@ public class AccountController {
                                 @RequestParam(required = false) String newName,
                                 @RequestParam(required = false) String newLastname,
                                 @RequestParam(required = false) String newEmail,
+                                @RequestParam(required = false) String repeatEmail,
                                 @RequestParam(required = false) String newPassword,
                                 @RequestParam(required = false) String repeatPassword,
                                 @RequestParam(required = false) Integer newTelephoneNumber,
                                 @RequestParam(required = false) String newAddress) {
-        String result = userService.editAccount(newName, newLastname, newEmail, newPassword, newTelephoneNumber, newAddress, repeatPassword);
+        String result = userService.editAccount(newName, newLastname, newEmail, newPassword, newTelephoneNumber, newAddress, repeatPassword, repeatEmail);
         if (result.equals("successfully updated account information")) {
             model.addAttribute("result", result);
             model.addAttribute("account", userService.getAccount());

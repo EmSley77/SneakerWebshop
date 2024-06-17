@@ -5,8 +5,10 @@ package es.sneakerwebshop.service;
  * this class is a service that is responsible for Admin users
  */
 
+import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.entity.User;
+import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.ProductRepository;
 import es.sneakerwebshop.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -26,9 +28,12 @@ public class AdminService {
 
     private ProductRepository productRepository;
 
-    public AdminService(UserRepository userRepository, ProductRepository productRepository) {
+    private OrderRepository orderRepository;
+
+    public AdminService(UserRepository userRepository, ProductRepository productRepository, OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public String createAdminAccount(String name, String lastname, String email, String password, int telephoneNumber, String address) {
@@ -56,6 +61,36 @@ public class AdminService {
         } catch (Exception e) {
             e.printStackTrace();
             return "could not create account";
+        }
+    }
+
+    // get orders that are Pending
+    public List<Order> getPendingOrders() {
+        return orderRepository.findOrdersByStatus("Pending");
+    }
+
+    // get orders that are sent
+    public List<Order> getSentOrders() {
+        return orderRepository.findOrdersByStatus("Sent");
+    }
+
+    //change order status to sent
+    public String orderStatusSent(int orderId) {
+        try {
+
+            Order order = orderRepository.findOrderByOrderId(orderId);
+            if (order == null) {
+                return "Could not find order to update status";
+            }
+
+            order.setOrderStatus("Sent");
+            orderRepository.save(order);
+            return "Order status changed to Sent";
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Could not update Order status";
         }
     }
 

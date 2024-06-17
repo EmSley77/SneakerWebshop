@@ -109,7 +109,7 @@ public class UserService {
 
 
     //edit user information, make these parameters required false in controller so no null exception is made
-    public String editAccount(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress, String repeatPassword) {
+    public String editAccount(String newName, String newLastname, String newEmail, String newPassword, Integer newTelephoneNumber, String newAddress, String repeatPassword, String repeatEmail) {
         try {
             User user = userRepository.findUserByUserId(userId);
             if (user == null) {
@@ -124,7 +124,7 @@ public class UserService {
                 user.setLastname(newLastname);
             }
 
-            if (newEmail != null && !newEmail.isEmpty() && userRepository.findByEmail(newEmail) == null) {
+            if (newEmail != null && !newEmail.isEmpty() && userRepository.findByEmail(newEmail) == null && repeatEmail.equals(newEmail)) {
                 user.setEmail(newEmail);
             }
             if (newPassword != null && !newPassword.isEmpty() && repeatPassword.equals(newPassword)) {

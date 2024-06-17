@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 public class SearchService {
 
-
     private ProductRepository productRepository;
 
     public SearchService(ProductRepository productRepository) {
