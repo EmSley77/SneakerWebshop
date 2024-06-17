@@ -139,14 +139,10 @@ public class AdminController {
     //get Orders
     @GetMapping("sneaker-get-all-orders")
     public String getOrders(Model model) {
-
         List<Order> allOrders = adminService.getOrders();
-
         if (!allOrders.isEmpty()) {
-
             model.addAttribute("orderList", allOrders);
             return "sneaker_admin_orderspage";
-
         } else {
             return "sneaker_adminpage";
         }
@@ -155,14 +151,10 @@ public class AdminController {
 
     @GetMapping("sneaker-get-sent-orders")
     public String getSentOrders(Model model) {
-
         List<Order> allOrders = adminService.getSentOrders();
-
         if (!allOrders.isEmpty()) {
-
             model.addAttribute("orderList", allOrders);
             return "sneaker_admin_orderspage";
-
         } else {
             return "sneaker_adminpage";
         }
@@ -171,13 +163,10 @@ public class AdminController {
 
     @GetMapping("sneaker-get-pending-orders")
     public String getPendingOrders(Model model) {
-
         List<Order> allOrders = adminService.getPendingOrders();
         if (!allOrders.isEmpty()) {
-
             model.addAttribute("orderList", allOrders);
-            return "sneaker_admin_orderspage";
-
+            return "sneaker_admin_pendingorderpage";
         } else {
             return "sneaker_adminpage";
         }
@@ -185,16 +174,17 @@ public class AdminController {
 
 
     // change order status from 'pending' to 'Sent'
+    @PostMapping("sneaker-admin-update-order-status")
     public String changeOrderStatus(@RequestParam int orderId, Model model) {
         String result = adminService.orderStatusSent(orderId);
         if (result.equals("Order status changed to Sent")) {
             List<Order> allOrders = adminService.getPendingOrders();
             model.addAttribute("orderList", allOrders);
-            return "sneaker_admin_orderspage";
+            return "sneaker_admin_pendingorderpage";
         } else {
             List<Order> allOrders = adminService.getPendingOrders();
             model.addAttribute("orderList", allOrders);
-            return "sneaker_admin_orderspage";
+            return "sneaker_admin_pendingorderpage";
         }
 
     }

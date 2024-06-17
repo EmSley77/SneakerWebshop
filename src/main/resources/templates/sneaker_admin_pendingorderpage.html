@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orders Page</title>
+    <title>Pending Order page</title>
 </head>
 <body>
 <table>
@@ -12,6 +12,12 @@
         <td th:text="${o.getUserId()}"></td>
         <td th:text="${o.getTotalCost()}"></td>
         <td th:text="${o.getOrderDate()}"></td>
+        <td>
+            <form action="sneaker-admin-update-order-status" method="post">
+                <input type="hidden" name="orderId">
+                <button type="submit">sent</button>
+            </form>
+        </td>
     </tr>
     </thead>
 </table>

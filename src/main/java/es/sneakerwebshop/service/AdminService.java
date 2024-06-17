@@ -66,12 +66,12 @@ public class AdminService {
 
     // get orders that are Pending
     public List<Order> getPendingOrders() {
-        return orderRepository.findOrdersByStatus("Pending");
+        return orderRepository.findOrdersByOrderStatus("Pending");
     }
 
     // get orders that are sent
     public List<Order> getSentOrders() {
-        return orderRepository.findOrdersByStatus("Sent");
+        return orderRepository.findOrdersByOrderStatus("Sent");
     }
 
 
