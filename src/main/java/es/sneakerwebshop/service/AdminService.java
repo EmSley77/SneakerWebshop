@@ -74,6 +74,13 @@ public class AdminService {
         return orderRepository.findOrdersByStatus("Sent");
     }
 
+
+    // get orders
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
+
+
     //change order status to sent
     public String orderStatusSent(int orderId) {
         try {

@@ -5,6 +5,7 @@ package es.sneakerwebshop.ui;
  * Controller for admin
  */
 
+import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.AdminService;
 import es.sneakerwebshop.service.ProductService;
@@ -133,5 +134,54 @@ public class AdminController {
         adminService.getProductsAfterEditing(model);
         model.addAttribute("result", result);
         return "sneaker_admin_allproductspage";
+    }
+
+    //get Orders
+    @GetMapping("sneaker-get-all-orders")
+    public String getOrders(Model model) {
+
+        List<Order> allOrders = adminService.getOrders();
+
+        if (!allOrders.isEmpty()) {
+
+            model.addAttribute("orderList", allOrders);
+            return "sneaker_admin_orderspage";
+
+        } else {
+            return "sneaker_adminpage";
+        }
+
+    }
+
+    @GetMapping("sneaker-get-sent-orders")
+    public String getSentOrders(Model model) {
+
+        List<Order> allOrders = adminService.getSentOrders();
+
+        if (!allOrders.isEmpty()) {
+
+            model.addAttribute("orderList", allOrders);
+            return "sneaker_admin_orderspage";
+
+        } else {
+            return "sneaker_adminpage";
+        }
+
+    }
+
+    @GetMapping("sneaker-get-pending-orders")
+
+    public String getPendingOrders(Model model) {
+
+        List<Order> allOrders = adminService.getPendingOrders();
+        if (!allOrders.isEmpty()) {
+
+            model.addAttribute("orderList", allOrders);
+            return "sneaker_admin_orderspage";
+
+        } else {
+            return "sneaker_adminpage";
+        }
+
     }
 }
