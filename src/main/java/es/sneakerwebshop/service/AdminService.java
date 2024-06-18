@@ -80,6 +80,16 @@ public class AdminService {
         return orderRepository.findAll();
     }
 
+    // get admins
+    public List<User> getAdminUsers() {
+        return userRepository.findUsersByRole(2);
+    }
+
+    // get Users
+    public List<User> getUsers() {
+        return userRepository.findUsersByRole(1);
+    }
+
 
     //change order status to sent
     public String orderStatusSent(int orderId) {

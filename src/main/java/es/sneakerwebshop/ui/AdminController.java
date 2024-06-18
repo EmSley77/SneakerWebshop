@@ -7,6 +7,7 @@ package es.sneakerwebshop.ui;
 
 import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Product;
+import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.service.AdminService;
 import es.sneakerwebshop.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -185,6 +186,18 @@ public class AdminController {
             List<Order> allOrders = adminService.getPendingOrders();
             model.addAttribute("orderList", allOrders);
             return "sneaker_admin_pendingorderpage";
+        }
+
+    }
+
+    @GetMapping("sneaker-admin-get-admins")
+    public String getAdmins(Model model) {
+        List<User> adminList = adminService.getAdminUsers();
+        if (!adminList.isEmpty()) {
+            model.addAttribute("adminList", adminList);
+            return "sneaker_admin_getuserpage";
+        } else {
+            return "sneaker_adminpage";
         }
 
     }
