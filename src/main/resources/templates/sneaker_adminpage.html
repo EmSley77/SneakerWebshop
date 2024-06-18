@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <title>Admin Page</title>
     <style>
+        .register {
+            background-color: rgba(28, 18, 18, 0.15);
+            border-radius: 5px;
+        }
+        .users-admins {
+            background-color: rgba(28, 18, 18, 0.15);
+            border-radius: 5px;
+        }
+
+        .all-products {
+            background-color: rgba(28, 18, 18, 0.15);
+            border-radius: 5px;
+        }
+
+        .product-add {
+            background-color: rgba(28, 18, 18, 0.15);
+            border-radius: 5px;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #070734;
             margin: 0;
             padding: 0;
             display: flex;
@@ -14,7 +33,10 @@
             align-items: center;
             flex-direction: column;
             min-height: 100vh;
+            font-size: 20px;
+
         }
+
         .container {
             width: 90%;
             max-width: 600px;
@@ -24,13 +46,16 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
+
         .register, .product-add {
             margin-bottom: 20px;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         form input, form select, form button {
             margin-bottom: 15px;
             padding: 10px;
@@ -38,18 +63,22 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         form button {
             background-color: #666ecb;
             color: white;
             cursor: pointer;
         }
+
         form button:hover {
             background-color: #28254b;
         }
+
         a {
             font-weight: bold;
             margin-bottom: 5px;
         }
+
         span {
             color: red;
         }
