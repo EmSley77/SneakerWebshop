@@ -8,11 +8,20 @@
 <div class="container">
     <table>
         <thead>
-        <tr th:each="${userList}">
-            <td></td>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.getRole()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastname()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getTelephoneNumber()}"></td>
+            <td th:text="${user.getRegistrationDate()}"></td>
         </tr>
         </thead>
     </table>
+
+    <form action="sneaker-admin-page" method="get">
+        <button type="submit">admin page</button>
+    </form>
 </div>
 </body>
 </html>

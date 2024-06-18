@@ -190,11 +190,25 @@ public class AdminController {
 
     }
 
+    // get admins
     @GetMapping("sneaker-admin-get-admins")
     public String getAdmins(Model model) {
         List<User> adminList = adminService.getAdminUsers();
         if (!adminList.isEmpty()) {
             model.addAttribute("userList", adminList);
+            return "sneaker_admin_getuserpage";
+        } else {
+            return "sneaker_adminpage";
+        }
+
+    }
+
+    // get Users
+    @GetMapping("sneaker-admin-get-users")
+    public String getUsers(Model model) {
+        List<User> userList = adminService.getUsers();
+        if (!userList.isEmpty()) {
+            model.addAttribute("userList", userList);
             return "sneaker_admin_getuserpage";
         } else {
             return "sneaker_adminpage";
