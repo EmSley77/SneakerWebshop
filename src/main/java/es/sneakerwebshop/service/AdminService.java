@@ -82,12 +82,12 @@ public class AdminService {
 
     // get admins
     public List<User> getAdminUsers() {
-        return userRepository.findUsersByRole(2);
+        return userRepository.findUsersByRole(1);
     }
 
     // get Users
     public List<User> getUsers() {
-        return userRepository.findUsersByRole(1);
+        return userRepository.findUsersByRole(0);
     }
 
 
