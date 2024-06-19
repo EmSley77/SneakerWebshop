@@ -65,7 +65,7 @@
         </thead>
         <tbody>
         <tr th:each="user : ${userList}">
-            <td th:text="${user.getRole()}"></td>
+            <td th:text="${user.getUserId()}"></td>
             <td th:text="${user.getName()}"></td>
             <td th:text="${user.getLastname()}"></td>
             <td th:text="${user.getEmail()}"></td>
