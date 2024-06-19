@@ -74,7 +74,6 @@ public class AdminService {
         return orderRepository.findOrdersByOrderStatus("Sent");
     }
 
-
     // get orders
     public List<Order> getOrders() {
         return orderRepository.findAll();

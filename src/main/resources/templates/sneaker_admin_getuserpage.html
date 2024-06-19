@@ -15,6 +15,12 @@
             <td th:text="${user.getEmail()}"></td>
             <td th:text="${user.getTelephoneNumber()}"></td>
             <td th:text="${user.getRegistrationDate()}"></td>
+            <td>
+                <form action="sneaker-admin-get-user-orders" method="get">
+                    <input type="hidden" name="userId" th:value="${user.getUserId()}" >
+                    <button type="submit">view orders</button>
+                </form>
+            </td>
         </tr>
         </thead>
     </table>

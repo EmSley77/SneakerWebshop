@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User orders page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container {
+      width: 80%;
+      margin-top: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+      background-color: #fff;
+    }
+    th {
+      background-color: #1e175d;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    form {
+      margin-top: 20px;
+    }
+    button {
+      background-color: #281867;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #4d2470;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <table>
+    <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Total Cost</th>
+      <th>Order Status</th>
+      <th>Order Date</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="o : ${orderList}">
+      <td th:text="${o.getOrderId()}">12345</td>
+      <td th:text="${o.getTotalCost()}">$200</td>
+      <td th:text="${o.getOrderStatus()}">Shipped</td>
+      <td th:text="${o.getOrderDate()}">2024-06-16</td>
+      <td>
+        <form action="sneaker-get-my-orderdetails" method="get">
+          <input type="hidden" name="orderId" th:value="${o.getOrderId()}">
+          <button type="submit">Order Detail</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <form action="sneaker-admin-page" method="get">
+    <button type="submit">admin page</button>
+  </form>
+</div>
+</body>
+</html>

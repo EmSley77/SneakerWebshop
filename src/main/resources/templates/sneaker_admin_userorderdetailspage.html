@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order-Details-Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            background-color: #fff;
+        }
+        th {
+            background-color: #200f70;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .img {
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+        }
+        form {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #131759;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #6a2d88;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Amount</th>
+            <th>Total Cost</th>
+            <th>Order Time</th>
+            <th>Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ol, image : ${orderlines}">
+            <td th:text="${ol.getProductName()}"></td>
+            <td th:text="${ol.getAmount()}"></td>
+            <td th:text="${ol.getTotalCost()}"></td>
+            <td th:text="${ol.getOrderTime()}"></td>
+            <td th:if="${images != null and !images.isEmpty()}">
+                <img th:src="'data:image/png;base64,' + ${images[image.index]}" class="img" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="sneaker-admin-get-user-orders" method="get">
+    <button type="submit">My Orders</button>
+</form>
+</body>
+</html>

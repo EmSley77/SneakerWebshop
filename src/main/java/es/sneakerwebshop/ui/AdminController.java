@@ -6,9 +6,11 @@ package es.sneakerwebshop.ui;
  */
 
 import es.sneakerwebshop.entity.Order;
+import es.sneakerwebshop.entity.Orderlines;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.service.AdminService;
+import es.sneakerwebshop.service.OrderService;
 import es.sneakerwebshop.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -29,9 +32,12 @@ public class AdminController {
 
     private ProductService productService;
 
-    public AdminController(AdminService adminService, ProductService productService) {
+    private OrderService orderService;
+
+    public AdminController(AdminService adminService, ProductService productService, OrderService orderService) {
         this.adminService = adminService;
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     // get admin page
@@ -215,5 +221,37 @@ public class AdminController {
             return "sneaker_adminpage";
         }
 
+    }
+
+    // get user order
+    @GetMapping("sneaker-admin-get-user-orders")
+    public String getuserOrders(@RequestParam int userid, Model model) {
+        List<Order> orderList = orderService.getUserOrders(userid);
+        if (!orderList.isEmpty()) {
+            model.addAttribute("orders", orderList);
+            return "sneaker_admin_userorderspage";
+        } else {
+            return "sneaker_adminpage";
+        }
+    }
+
+    //get user order details
+    @GetMapping("sneaker-admin-get-user-order-details")
+    public String getUserOrderDetails(@RequestParam int orderId, @RequestParam int userId, Model model) {
+        List<Orderlines> orderlinesList = orderService.getOrderDetails(orderId);
+        if (!orderlinesList.isEmpty()) {
+            List<String> arrimg = new ArrayList<>();
+            for (Orderlines orderlines : orderlinesList) {
+                String base64Img = Base64.getEncoder().encodeToString(orderlines.getProductImage());
+                arrimg.add(base64Img);
+            }
+
+            model.addAttribute("orderlines", orderlinesList);
+            model.addAttribute("images", arrimg);
+            return "sneaker_admin_userorderdetailspage";
+        } else {
+            model.addAttribute("orders", orderService.getUserOrders(userId));
+            return "sneaker_admin_userorderspage";
+        }
     }
 }
