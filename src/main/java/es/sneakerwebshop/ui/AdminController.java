@@ -34,6 +34,7 @@ public class AdminController {
         this.productService = productService;
     }
 
+    // get admin page
     @GetMapping("sneaker-admin-page")
     public String getAdminPage() {
         return "sneaker_adminpage";
@@ -80,7 +81,7 @@ public class AdminController {
     }
 
 
-    //user adds a new product
+    //Admin2 adds a new product
     @PostMapping("sneaker-add-product")
     public String addProduct(
             @RequestParam String category,

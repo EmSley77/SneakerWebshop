@@ -86,6 +86,52 @@
 </head>
 <body>
 <div class="container">
+    <div class="register">
+        <form action="sneaker-register-admin" method="post">
+            <a>REGISTER NEW ADMIN</a>
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="text" name="lastname" placeholder="Enter Lastname" required>
+            <input type="email" name="email" placeholder="Enter Email" required>
+            <input type="email" name="repeatEmail" placeholder="Repeat Email" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <input type="password" name="repeatPassword" placeholder="Repeat Password" required>
+            <input type="tel" name="telephoneNumber" placeholder="Enter Cellphone" required>
+            <input type="text" name="address" placeholder="Enter Your Address" required>
+            <button type="submit">Register</button>
+            <span th:text="${result}"></span>
+        </form>
+    </div>
+
+    <div class="product-add">
+        <a>REGISTER NEW PRODUCT</a>
+        <form action="sneaker-add-product" method="post" enctype="multipart/form-data">
+            <a>Category</a>
+            <select name="category" required>
+                <option value="Boot">Boot</option>
+                <option value="Sneaker">Sneaker</option>
+                <option value="Designer">Designer</option>
+                <option value="Sport">Sport</option>
+            </select>
+            <a>Brand</a>
+            <select name="brand" required>
+                <option value="Nike">Nike</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Yeezy">Yeezy</option>
+                <option value="Puma">Puma</option>
+                <option value="New-Balance">New-Balance</option>
+                <option value="Asics">Asics</option>
+                <option value="BOSS">BOSS</option>
+                <option value="Louboutin">Louboutin</option>
+            </select>
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="number" name="productCost" placeholder="Enter Cost" required>
+            <input type="number" name="stock" placeholder="Enter Stock Amount" required>
+            <input type="number" name="shoeSize" placeholder="Enter Size" required>
+            <a>ADD IMAGE</a>
+            <input type="file" name="image" required>
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
 
     <div class="all-products">
         <a>VIEW ALL REGISTERED PRODUCTS</a>
@@ -107,7 +153,15 @@
         </form>
     </div>
 
-
+    <div class="users-admins">
+        <a>view users and admins</a>
+        <form action="sneaker-admin-get-admins" method="get">
+            <button type="submit">view admins</button>
+        </form>
+        <form action="sneaker-admin-get-users" method="get">
+            <button type="submit">view users</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
