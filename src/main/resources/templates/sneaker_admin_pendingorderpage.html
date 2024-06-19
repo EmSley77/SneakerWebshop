@@ -14,7 +14,7 @@
         <td th:text="${o.getOrderDate()}"></td>
         <td>
             <form action="sneaker-admin-update-order-status" method="post">
-                <input type="hidden" name="orderId">
+                <input type="hidden" name="orderId" th:value="${o.getOrderId()}">
                 <button type="submit">sent</button>
             </form>
         </td>

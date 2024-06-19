@@ -186,12 +186,12 @@ public class AdminController {
     public String changeOrderStatus(@RequestParam int orderId, Model model) {
         String result = adminService.orderStatusSent(orderId);
         if (result.equals("Order status changed to Sent")) {
-            List<Order> allOrders = adminService.getPendingOrders();
-            model.addAttribute("orderList", allOrders);
+            List<Order> pendingOrders = adminService.getPendingOrders();
+            model.addAttribute("orderList", pendingOrders);
             return "sneaker_admin_pendingorderpage";
         } else {
-            List<Order> allOrders = adminService.getPendingOrders();
-            model.addAttribute("orderList", allOrders);
+            List<Order> pendingOrders = adminService.getPendingOrders();
+            model.addAttribute("orderList", pendingOrders);
             return "sneaker_admin_pendingorderpage";
         }
 
