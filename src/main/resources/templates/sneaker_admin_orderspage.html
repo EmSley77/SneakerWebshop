@@ -3,21 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Orders Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #007bb5;
+        }
+    </style>
 </head>
 <body>
-<table>
-    <thead>
-    <tr th:each="o :${orderList}">
-        <td th:text="${o.getOrderId()}"></td>
-        <td th:text="${o.getUserId()}"></td>
-        <td th:text="${o.getTotalCost()}"></td>
-        <td th:text="${o.getOrderDate()}"></td>
-    </tr>
-    </thead>
-</table>
+<div class="container">
+    <h1>Orders</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>User ID</th>
+            <th>Total Cost</th>
+            <th>Order Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="o :${orderList}">
+            <td th:text="${o.getOrderId()}"></td>
+            <td th:text="${o.getUserId()}"></td>
+            <td th:text="${o.getTotalCost()}"></td>
+            <td th:text="${o.getOrderDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-<form action="sneaker-admin-page" method="get">
-    <button type="submit">admin-page</button>
-</form>
+    <form action="sneaker-admin-page" method="get">
+        <button type="submit" class="btn">Admin Page</button>
+    </form>
+</div>
 </body>
 </html>
