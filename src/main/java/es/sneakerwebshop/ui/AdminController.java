@@ -225,8 +225,8 @@ public class AdminController {
 
     // get user order
     @GetMapping("sneaker-admin-get-user-orders")
-    public String getuserOrders(@RequestParam int userid, Model model) {
-        List<Order> orderList = orderService.getUserOrders(userid);
+    public String getuserOrders(@RequestParam int userId, Model model) {
+        List<Order> orderList = orderService.getUserOrders(userId);
         if (!orderList.isEmpty()) {
             model.addAttribute("orders", orderList);
             return "sneaker_admin_userorderspage";
@@ -237,7 +237,7 @@ public class AdminController {
 
     //get user order details
     @GetMapping("sneaker-admin-get-user-order-details")
-    public String getUserOrderDetails(@RequestParam int orderId, @RequestParam int userId, Model model) {
+    public String getUserOrderDetails(@RequestParam int orderId,  Model model) {
         List<Orderlines> orderlinesList = orderService.getOrderDetails(orderId);
         if (!orderlinesList.isEmpty()) {
             List<String> arrimg = new ArrayList<>();
@@ -250,7 +250,6 @@ public class AdminController {
             model.addAttribute("images", arrimg);
             return "sneaker_admin_userorderdetailspage";
         } else {
-            model.addAttribute("orders", orderService.getUserOrders(userId));
             return "sneaker_admin_userorderspage";
         }
     }

@@ -69,10 +69,10 @@
         </thead>
         <tbody>
         <tr th:each="o : ${orderList}">
-            <td th:text="${o.getOrderId()}">12345</td>
-            <td th:text="${o.getTotalCost()}">$200</td>
-            <td th:text="${o.getOrderStatus()}">Shipped</td>
-            <td th:text="${o.getOrderDate()}">2024-06-16</td>
+            <td th:text="${o.getOrderId()}"></td>
+            <td th:text="${o.getTotalCost()}"></td>
+            <td th:text="${o.getOrderStatus()}"></td>
+            <td th:text="${o.getOrderDate()}"></td>
             <td>
                 <form action="sneaker-get-my-orderdetails" method="get">
                     <input type="hidden" name="orderId" th:value="${o.getOrderId()}">
