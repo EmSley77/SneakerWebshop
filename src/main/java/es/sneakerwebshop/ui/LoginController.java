@@ -41,6 +41,9 @@ public class LoginController {
         else if (result.equals("login granted") && userService.getRole() == 1) {
             return "sneaker_adminpage";
         }
+        else if (result.equals("login granted") && userService.getRole() == 2) {
+            return "sneaker_adminpage2";
+        }
         else {
             model.addAttribute("result", result);
             return "sneaker_loginpage";
