@@ -26,11 +26,15 @@ public class Order {
     @Basic
     @Column(name = "order_status", nullable = false, length = 45)
     private String orderStatus;
+    @Basic
+    @Column(name = "order_user_address", nullable = false, length = 45)
+    private String orderUserAddress;
 
-    public Order(int userId, int totalCost, Date orderDate, String orderStatus) {
+    public Order(int userId, int totalCost, Date orderDate, String orderStatus, String orderUserAddress) {
         this.userId = userId;
         this.totalCost = totalCost;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
+        this.orderUserAddress = orderUserAddress;
     }
 }

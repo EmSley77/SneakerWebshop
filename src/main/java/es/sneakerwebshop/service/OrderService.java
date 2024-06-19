@@ -63,6 +63,7 @@ public class OrderService {
         order.setUserId(user.getUserId());
         order.setOrderDate(Date.valueOf(LocalDate.now()));
         order.setOrderStatus("Pending");
+        order.setOrderUserAddress(user.getAddress());
 
         orderRepository.save(order);
 
