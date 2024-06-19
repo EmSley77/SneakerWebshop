@@ -203,7 +203,7 @@ public class AdminController {
         List<User> adminList = adminService.getAdminUsers();
         if (!adminList.isEmpty()) {
             model.addAttribute("userList", adminList);
-            return "sneaker_admin_getuserpage";
+            return "sneaker_admin_getadminspage";
         } else {
             return "sneaker_adminpage";
         }

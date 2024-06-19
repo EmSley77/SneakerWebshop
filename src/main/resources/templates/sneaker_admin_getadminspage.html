@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admins Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+    form button {
+      background-color: #008CBA;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    form button:hover {
+      background-color: #007bb5;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <table>
+    <thead>
+    <tr>
+      <th>Role</th>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Telephone</th>
+      <th>Registration Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${userList}">
+      <td th:text="${user.getRole()}"></td>
+      <td th:text="${user.getName()}"></td>
+      <td th:text="${user.getLastname()}"></td>
+      <td th:text="${user.getEmail()}"></td>
+      <td th:text="${user.getTelephoneNumber()}"></td>
+      <td th:text="${user.getRegistrationDate()}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <form action="sneaker-admin-page" method="get">
+    <button type="submit">Admin Page</button>
+  </form>
+</div>
+</body>
+</html>
