@@ -71,6 +71,7 @@ public class OrderController {
         String result = orderService.makeOrder(email, password);
         if (result.equals("Order has been successfully made")) {
             model.addAttribute("orderresult", result);
+            model.addAttribute("user", orderService.getUserInformation());
             return "sneaker_orderconfirmpage";
         } else {
             model.addAttribute("orderresult", result);

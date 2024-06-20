@@ -110,6 +110,16 @@
         </table>
     </div>
 
+    <div class="user-info">
+        <a>These are your personal information, check if everything is correct.</a>
+        <p>Name: <span th:text="${user.getName()}"></span></p>
+        <p>Lastname: <span th:text="${user.getLastname()}"></span></p>
+        <p>Postage address: <span th:text="${user.getAddress()}"></span></p>
+        <p>Email: <span th:text="${user.getEmail()}"></span></p>
+        <p>Telephone: <span th:text="${user.getTelephoneNumber()}"></span></p>
+    </div>
+
+
     <form action="sneaker-make-order" method="post">
         <input type="text" name="email" placeholder="Enter Email" required>
         <input type="password" name="password" placeholder="Enter Password" required>
