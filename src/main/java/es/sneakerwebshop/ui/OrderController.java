@@ -7,6 +7,7 @@ package es.sneakerwebshop.ui;
  */
 import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Orderlines;
+import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.service.OrderService;
 import es.sneakerwebshop.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -70,9 +71,10 @@ public class OrderController {
     @PostMapping("sneaker-make-order")
     public String makeOrder(@RequestParam String email, @RequestParam String password, Model model) {
         String result = orderService.makeOrder(email, password);
+        User user =  userService.getAccount();
         if (result.equals("Order has been successfully made")) {
             model.addAttribute("orderresult", result);
-            model.addAttribute("user", userService.getAccount());
+            model.addAttribute("user", user);
             return "sneaker_orderconfirmpage";
         } else {
             model.addAttribute("orderresult", result);

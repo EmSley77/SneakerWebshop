@@ -110,7 +110,7 @@
         </table>
     </div>
 
-    <div class="user-info">
+    <div class="user-info" th:if="${user != null}">
         <a>These are your personal information, check if everything is correct.</a>
         <p>Name: <span th:text="${user.getName()}"></span></p>
         <p>Lastname: <span th:text="${user.getLastname()}"></span></p>
