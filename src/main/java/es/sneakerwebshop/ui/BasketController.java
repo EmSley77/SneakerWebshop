@@ -8,6 +8,7 @@ package es.sneakerwebshop.ui;
 import es.sneakerwebshop.entity.Product;
 import es.sneakerwebshop.service.BasketService;
 import es.sneakerwebshop.service.SearchService;
+import es.sneakerwebshop.service.UserService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +28,12 @@ public class BasketController {
 
     private SearchService searchService;
 
-    public BasketController(BasketService basketService, SearchService searchService) {
+    private UserService userService;
+
+    public BasketController(BasketService basketService, SearchService searchService, UserService userService) {
         this.basketService = basketService;
         this.searchService = searchService;
+        this.userService = userService;
     }
 
     @GetMapping("sneaker-get-basket")
@@ -92,6 +96,7 @@ public class BasketController {
     public String getBasket(Model model) {
         basketService.getBasket(model);
         model.addAttribute("totalCost", basketService.getBasketTotalCost());
+        model.addAttribute("user", userService.getAccount());
         return "sneaker_confirmbasketpage";
     }
 
