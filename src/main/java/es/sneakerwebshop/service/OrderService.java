@@ -12,6 +12,7 @@ import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
 import es.sneakerwebshop.repository.UserRepository;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,13 @@ public class OrderService {
     private BasketService basketService;
 
     private UserService userService;
+
+    @Getter
+    private String userAddress;
+    @Getter
+    private int tel;
+    @Getter
+    private String email;
 
     public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService) {
         this.orderRepository = orderRepository;
@@ -57,7 +65,9 @@ public class OrderService {
             return "No user found with email " + email + "and password " + password;
         }
 
-        if (!email.equals(user.getEmail()))
+        if (!email.equals(user.getEmail()) || !password.equals(user.getPassword())) {
+            return "Credentials cannot match with user, please try again";
+        }
 
         if (basketService.getBasket().isEmpty()) {
             return "Cannot set an order with an empty basket";
@@ -66,6 +76,9 @@ public class OrderService {
         if (basketService.getBasketTotalCost() == 0) {
             return "Cannot set order when basket total is '0' ";
         }
+
+
+
 
 
 
