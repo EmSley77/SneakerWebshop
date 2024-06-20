@@ -12,9 +12,11 @@ import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
 import es.sneakerwebshop.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -23,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@SessionScope
 public class OrderService {
 
     private OrderRepository orderRepository;
@@ -35,19 +38,19 @@ public class OrderService {
 
     private UserService userService;
 
-    @Getter
-    private String userAddress;
-    @Getter
-    private int tel;
-    @Getter
-    private String email;
+    private HttpSession session;
 
-    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService) {
+    //these getters used for viewing to user where to contact the person and where to send of the items.
+    @Getter
+    private User userInformation;
+
+    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService, HttpSession session) {
         this.orderRepository = orderRepository;
         this.orderlineRepository = orderlineRepository;
         this.userService = userService;
         this.userRepository = userRepository;
         this.basketService = basketService;
+        this.session = session;
     }
 
     // Make order
@@ -78,8 +81,9 @@ public class OrderService {
         }
 
 
-
-
+        session.setAttribute("user", user);
+        //this can be used to then view to user and get post address, deliver address and more...
+        userInformation = (User) session.getAttribute("user");
 
 
         Order order = new Order();
