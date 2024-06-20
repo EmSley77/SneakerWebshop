@@ -38,19 +38,17 @@ public class OrderService {
 
     private UserService userService;
 
-    private HttpSession session;
 
     //these getters used for viewing to user where to contact the person and where to send of the items.
     @Getter
     private User userInformation;
 
-    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService, HttpSession session) {
+    public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService) {
         this.orderRepository = orderRepository;
         this.orderlineRepository = orderlineRepository;
         this.userService = userService;
         this.userRepository = userRepository;
         this.basketService = basketService;
-        this.session = session;
     }
 
     // Make order
@@ -81,11 +79,6 @@ public class OrderService {
         }
 
 
-        session.setAttribute("user", user);
-        //this can be used to then view to user and get post address, deliver address and more...
-        userInformation = (User) session.getAttribute("user");
-
-
         Order order = new Order();
 
         order.setTotalCost(basketService.getBasketTotalCost());
@@ -114,6 +107,11 @@ public class OrderService {
 
         return "Order has been successfully made";
 
+    }
+
+    //get user info
+    public User getUser(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password);
     }
 
     // view order , admin

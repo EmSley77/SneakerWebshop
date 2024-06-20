@@ -9,6 +9,7 @@ import es.sneakerwebshop.entity.Order;
 import es.sneakerwebshop.entity.Orderlines;
 import es.sneakerwebshop.service.OrderService;
 import es.sneakerwebshop.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +72,7 @@ public class OrderController {
         String result = orderService.makeOrder(email, password);
         if (result.equals("Order has been successfully made")) {
             model.addAttribute("orderresult", result);
-            model.addAttribute("user", orderService.getUserInformation());
+            model.addAttribute("user", userService.getAccount());
             return "sneaker_orderconfirmpage";
         } else {
             model.addAttribute("orderresult", result);
