@@ -12,8 +12,6 @@ import es.sneakerwebshop.entity.User;
 import es.sneakerwebshop.repository.OrderRepository;
 import es.sneakerwebshop.repository.OrderlineRepository;
 import es.sneakerwebshop.repository.UserRepository;
-import jakarta.servlet.http.HttpSession;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.annotation.SessionScope;
@@ -38,10 +36,6 @@ public class OrderService {
 
     private UserService userService;
 
-
-    //these getters used for viewing to user where to contact the person and where to send of the items.
-    @Getter
-    private User userInformation;
 
     public OrderService(OrderRepository orderRepository, OrderlineRepository orderlineRepository, UserService userService, UserRepository userRepository, BasketService basketService) {
         this.orderRepository = orderRepository;
