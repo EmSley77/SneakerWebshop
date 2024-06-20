@@ -57,6 +57,10 @@ public class OrderService {
             return "No user found with email " + email + "and password " + password;
         }
 
+        if (basketService.getBasket().isEmpty()) {
+            return "Cannot set an order with an empty bsaket";
+        }
+
         Order order = new Order();
 
         order.setTotalCost(basketService.getBasketTotalCost());
