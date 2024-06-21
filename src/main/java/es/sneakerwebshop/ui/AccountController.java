@@ -41,11 +41,11 @@ public class AccountController {
         String result = userService.makeUserAdmin(userId);
         if (result.equals("user has become an admin")) {
             model.addAttribute("makeadmin", result);
-            return "sneaker_adminpage";
+            return "sneaker_admin_getuserpage";
         }
         else {
             model.addAttribute("makeadmin", result);
-            return "sneaker_adminpage";
+            return "sneaker_admin_getuserpage";
         }
 
     }

@@ -60,7 +60,9 @@
             <th>Email</th>
             <th>Telephone</th>
             <th>Registration Date</th>
-            <th>Actions</th>
+            <th>Orders</th>
+            <th>Make Admin</th>
+
         </tr>
         </thead>
         <tbody>
@@ -75,6 +77,13 @@
                 <form action="sneaker-admin-get-user-orders" method="get" class="actions">
                     <input type="hidden" name="userId" th:value="${user.getUserId()}">
                     <button type="submit">View Orders</button>
+                </form>
+            </td>
+            <td>
+                <form action="sneaker-make-user-admin" method="post">
+                    <input type="hidden" name="userId" th:value="${user.getUserId()}">
+                    <button type="submit">make admin</button>
+                    <a> <span th:text="${makeadmin}"></span></a>
                 </form>
             </td>
         </tr>
