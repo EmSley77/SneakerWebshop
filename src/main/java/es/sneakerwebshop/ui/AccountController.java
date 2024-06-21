@@ -35,6 +35,13 @@ public class AccountController {
 
     }
 
+    //make user an admin
+    @PostMapping("sneaker-make-user-admin")
+    public String makeUserAdmin(@RequestParam int userId, Model model) {
+        String reuserService.makeUserAdmin(userId);
+
+    }
+
     @PostMapping("sneaker-account-update")
     public String updateAccount(Model model,
                                 @RequestParam(required = false) String newName,
@@ -50,8 +57,7 @@ public class AccountController {
             model.addAttribute("result", result);
             model.addAttribute("account", userService.getAccount());
             return "sneaker_accountpage";
-        }
-        else {
+        } else {
             model.addAttribute("result", result);
             return "sneaker_accountpage";
         }

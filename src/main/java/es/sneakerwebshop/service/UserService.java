@@ -163,6 +163,22 @@ public class UserService {
         return userId = 0;
     }
 
+    //make user an admin, this is if an returning buyer now works for the company
+    public String makeUserAdmin(int userId) {
+        try {
+            User user = userRepository.findUserByUserId(userId);
+            if (user == null) {
+                return "could not find user";
+            }
+
+            user.setRole(1);
+            userRepository.save(user);
+            return "user has become an admin";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Could not make user an admin";
+        }
+    }
     //_________________methods for restApi________________________
     public List<User> getAllUsers() {
         return userRepository.findAll();
