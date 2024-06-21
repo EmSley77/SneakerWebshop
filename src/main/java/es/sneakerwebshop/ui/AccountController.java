@@ -38,7 +38,15 @@ public class AccountController {
     //make user an admin
     @PostMapping("sneaker-make-user-admin")
     public String makeUserAdmin(@RequestParam int userId, Model model) {
-        String reuserService.makeUserAdmin(userId);
+        String result = userService.makeUserAdmin(userId);
+        if (result.equals("user has become an admin")) {
+            model.addAttribute("makeadmin", result);
+            return "sneaker_adminpage";
+        }
+        else {
+            model.addAttribute("makeadmin", result);
+            return "sneaker_adminpage";
+        }
 
     }
 
